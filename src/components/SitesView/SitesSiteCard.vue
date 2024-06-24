@@ -48,6 +48,7 @@ export default {
     },
     showContextMenu() {
       this.contextMenuShown = true
+      this.$emit('open-siblings', this.url)
     },
     hideContextMenu() {
       if (this.contextMenuShown) {

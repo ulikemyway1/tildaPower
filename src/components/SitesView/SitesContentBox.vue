@@ -6,7 +6,9 @@
       :title="site.title"
       :url="site.url"
       :key="site.url"
+      :ref="site.url"
       @killMe="deleteSiteCard"
+      @open-siblings="closeAnotherContextMenu"
     />
   </main>
 </template>
@@ -55,6 +57,10 @@ export default {
           site.url = `https://my-project-${index + 1}`
         }
       })
+    },
+    closeAnotherContextMenu(url) {
+      console.log(this.$refs[url].hideContextMenu())
+      console.log(url)
     }
   },
   components: {
