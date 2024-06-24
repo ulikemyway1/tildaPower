@@ -17,7 +17,7 @@ const router = createRouter({
       component: ProfileView
     },
     {
-      path: '/editor:id',
+      path: '/editor/:id',
       name: 'siteEditor',
       component: SiteEditor,
       props: true

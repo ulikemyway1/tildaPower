@@ -1,5 +1,5 @@
 <template>
-  <article class="site-card" @click="hideContextMenu">
+  <article class="site-card" @click="this.handleCardClick">
     <div class="context-menu" v-if="contextMenuShown" @click.stop="">
       <div class="close-btn" @click="this.contextMenuShown = false">X</div>
       <button class="button options" title="Rename Site Title">Rename</button>
@@ -53,10 +53,18 @@ export default {
       this.contextMenuShown = true
       this.$emit('open-siblings', this.url)
     },
+    handleCardClick() {
+      this.hideContextMenu()
+      this.redirectToEditor()
+    },
     hideContextMenu() {
       if (this.contextMenuShown) {
         this.contextMenuShown = false
       }
+    },
+    redirectToEditor() {
+      console.log('ss')
+      this.$router.push(`/editor/${this.url}`)
     }
   }
 }
