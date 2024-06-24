@@ -8,6 +8,7 @@
 
     <div class="site-card__header">
       <h3 class="site-card__title" v-text="title"></h3>
+
       <div
         v-if="!this.contextMenuShown"
         class="site-card__context-menu-btn"
@@ -51,7 +52,6 @@ export default {
     },
     showContextMenu() {
       this.contextMenuShown = true
-      this.$emit('open-siblings', this.url)
     },
     handleCardClick() {
       this.hideContextMenu()
