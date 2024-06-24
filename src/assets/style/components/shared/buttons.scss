@@ -22,6 +22,14 @@
   padding: 5px 10px;
 }
 
+.button.logout-btn {
+  background: $logout-btn;
+  color: $black-text;
+  font-size: 22px;
+  font-weight: 900;
+  height: 80%;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
     background: $primary-btn-hover;
@@ -29,5 +37,9 @@
 
   .button.danger-btn:hover {
     background: $danger-btn-hover;
+  }
+
+  .button.logout-btn:hover {
+    background: $logout-btn-hover;
   }
 }

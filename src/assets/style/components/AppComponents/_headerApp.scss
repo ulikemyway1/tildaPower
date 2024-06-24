@@ -65,3 +65,18 @@
     opacity: 1 !important;
   }
 }
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 24px;
+  color: $white-text;
+}
+
+.last-content-wrapper {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 20px;
+}
