@@ -2,8 +2,8 @@
   <article class="site-card" @click="hideContextMenu">
     <div class="context-menu" v-if="contextMenuShown" @click.stop="">
       <div class="close-btn" @click="this.contextMenuShown = false">X</div>
-      <button class="button options">Rename</button>
-      <button class="button danger-btn" @click="killMe">Delete</button>
+      <button class="button options" title="Rename Site Title">Rename</button>
+      <button class="button danger-btn" @click="killMe" title="Delete Site">Delete</button>
     </div>
 
     <div class="site-card__header">
@@ -12,13 +12,14 @@
         v-if="!this.contextMenuShown"
         class="site-card__context-menu-btn"
         @click.stop="showContextMenu"
+        title="Show context menu"
       >
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot" aria-hidden="true"></div>
+        <div class="dot" aria-hidden="true"></div>
+        <div class="dot" aria-hidden="true"></div>
       </div>
     </div>
-    <a :href="url" class="site-card__url link" v-text="url"></a>
+    <a :href="url" class="site-card__url link" v-text="url" target="__blank"></a>
   </article>
 </template>
 
@@ -43,6 +44,7 @@ export default {
   methods: {
     killMe() {
       this.$emit('killMe', this.url)
+      this.hideContextMenu()
     },
     showContextMenu() {
       this.contextMenuShown = true

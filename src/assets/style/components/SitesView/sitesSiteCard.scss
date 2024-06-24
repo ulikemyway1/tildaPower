@@ -7,7 +7,9 @@
   height: 100%;
   padding: 20px;
   border: 2px solid $border-dark;
+  background: $white-text;
   border-radius: 12px;
+  transition: filter 0.4s;
   cursor: pointer;
 
   &__header {
@@ -52,6 +54,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .site-card:hover {
+    filter: drop-shadow(0 0 4px $black-text);
+  }
+
   .site-card__url:hover {
     color: $black-text-hover;
   }
