@@ -50,8 +50,10 @@ export default {
     deleteSiteCard(url) {
       this.sites = this.sites.filter((site) => site.url !== url)
       this.sites.forEach((site, index) => {
-        site.title = `My project ${index + 1}`
-        site.url = `https://my-project-${index + 1}`
+        if (site.title.includes('My project')) {
+          site.title = `My project ${index + 1}`
+          site.url = `https://my-project-${index + 1}`
+        }
       })
     }
   },
