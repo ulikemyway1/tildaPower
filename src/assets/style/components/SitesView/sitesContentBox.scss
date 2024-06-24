@@ -20,7 +20,7 @@
   font-size: 22px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .sites__content-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -53,4 +53,23 @@
   margin-top: 20px;
   text-align: center;
   font-size: 36px;
+}
+
+@media (max-width: 500px) {
+  .header__nav-ul {
+    gap: 15px;
+  }
+  .button.logout-btn {
+    font-size: 14px;
+  }
+
+  .header {
+    gap: 20px;
+  }
+  .container {
+    padding: 0 5px;
+  }
+  .user {
+    display: none;
+  }
 }
