@@ -80,3 +80,30 @@
   align-items: center;
   gap: 20px;
 }
+
+@media (max-width: 780px) {
+  .user__name {
+    display: none;
+  }
+
+  .header {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .user {
+    display: none;
+  }
+
+  .header__nav-ul {
+    gap: 15px;
+  }
+  .button.logout-btn {
+    font-size: 14px;
+  }
+
+  .header {
+    gap: 20px;
+  }
+}

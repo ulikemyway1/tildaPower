@@ -21,6 +21,12 @@
   font-size: 22px;
 }
 
+@media (max-width: 1500px) {
+  .sites__content-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1300px) {
   .sites__content-wrapper {
     grid-template-columns: repeat(2, 1fr);
@@ -37,16 +43,9 @@
   .site-card__title {
     font-size: 30px;
   }
-  .header {
-    gap: 20px;
-  }
 
   .button.logout-btn {
     padding: 5px;
-  }
-
-  .user__name {
-    display: none;
   }
 }
 
@@ -57,20 +56,7 @@
 }
 
 @media (max-width: 500px) {
-  .header__nav-ul {
-    gap: 15px;
-  }
-  .button.logout-btn {
-    font-size: 14px;
-  }
-
-  .header {
-    gap: 20px;
-  }
   .container {
     padding: 0 5px;
-  }
-  .user {
-    display: none;
   }
 }
