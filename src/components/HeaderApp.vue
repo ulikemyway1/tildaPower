@@ -26,10 +26,10 @@
     <nav class="header__nav">
       <ul class="header__nav-ul">
         <li class="header__nav-li">
-          <RouterLink class="link" to="/">Main Page</RouterLink>
+          <RouterLink class="link" to="/">My sites</RouterLink>
         </li>
         <li class="header__nav-li">
-          <RouterLink class="link" to="/sites">My sites</RouterLink>
+          <RouterLink class="link" to="/profile">Profile</RouterLink>
         </li>
       </ul>
     </nav>
