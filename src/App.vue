@@ -1,8 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import HomeView from './views/HomeView.vue'
+import HeaderApp from './components/HeaderApp.vue'
 </script>
 
 <template>
-  <h1>Oh..shh.. here we go again</h1>
+  <HeaderApp />
+  <RouterView />
 </template>
