@@ -19,7 +19,10 @@
         <div class="dot" aria-hidden="true"></div>
       </div>
     </div>
-    <a :href="url" class="site-card__url link" v-text="url" target="__blank"></a>
+    <div class="site-card__footer">
+      <button class="button edit-btn">Edit</button>
+      <a :href="url" class="site-card__url link" v-text="url" target="__blank"></a>
+    </div>
   </article>
 </template>
 

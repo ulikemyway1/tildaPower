@@ -30,6 +30,10 @@
   height: 80%;
 }
 
+.button.options {
+  background: $options-btn;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
     background: $primary-btn-hover;
@@ -41,5 +45,9 @@
 
   .button.logout-btn:hover {
     background: $logout-btn-hover;
+  }
+
+  .button.options:hover {
+    background: $options-btn-hover;
   }
 }

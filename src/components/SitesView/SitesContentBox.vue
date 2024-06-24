@@ -23,19 +23,19 @@ export default {
       sites: [
         {
           title: 'Lolly Jolly',
-          url: 'https://lolly-jolly.com'
+          url: 'lolly-jolly.tilda.prod'
         },
         {
           title: 'Hot Potato',
-          url: 'https://hot-potato.by'
+          url: 'hot-potato.tilda.prod'
         },
         {
           title: 'Moby Dick',
-          url: 'https://moby-dick.io'
+          url: 'moby-dick.tilda.prod'
         },
         {
           title: 'Milf Hunter',
-          url: 'https://just-joke.or.net'
+          url: 'just-joke.or.tilda.prod'
         }
       ]
     }
@@ -44,7 +44,7 @@ export default {
     createNewSite() {
       this.sites.push({
         title: this.siteTitle,
-        url: `https://my-project-${this.calcIndex()}`
+        url: `my-project-${this.calcIndex()}.tilda.prod`
       })
     },
     calcIndex() {
@@ -55,7 +55,7 @@ export default {
       this.sites.forEach((site, index) => {
         if (site.title.includes('My project')) {
           site.title = `My project ${index + 1}`
-          site.url = `https://my-project-${index + 1}`
+          site.url = `my-project-${index + 1}.tilda.prod`
         }
       })
     },
