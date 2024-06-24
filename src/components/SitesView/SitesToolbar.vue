@@ -1,7 +1,7 @@
 <template>
   <div class="toolbar">
     <span>My sites:</span>
-    <button class="create-new-btn" @click="createNewSite">Create New Site</button>
+    <button class="button create-new-btn" @click="createNewSite">Create New Site</button>
   </div>
 </template>
 

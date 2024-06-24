@@ -1,2 +1,11 @@
 @import url(sitesSiteCard.scss);
 @import url(sitesContentBox.scss);
+
+.sites {
+  padding-top: 100px;
+  &__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 900;
+  }
+}

@@ -5,11 +5,23 @@
   width: 100%;
   height: 100%;
   padding: 20px;
-  border: 1px solid black;
+  border: 2px solid $border-dark;
+  border-radius: 12px;
 
   &__title {
     text-align: center;
     font-size: 24px;
     text-transform: capitalize;
+  }
+
+  &__url {
+    color: $black-text;
+    font-size: 18px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-card__url:hover {
+    color: $black-text-hover;
   }
 }

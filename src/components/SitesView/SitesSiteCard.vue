@@ -1,8 +1,8 @@
 <template>
   <article class="site-card">
     <h3 class="site-card__title" v-text="title"></h3>
-    <a :href="url" class="site-card__url" v-text="url"></a>
-    <button @click="killMe">Delete</button>
+    <a :href="url" class="site-card__url link" v-text="url"></a>
+    <button class="button danger-btn" @click="killMe">Delete</button>
   </article>
 </template>
 

@@ -1,7 +1,11 @@
 <template>
-  <h2>Sites View</h2>
-  <SitesToolbar @createNewSiteEvent="handleCreateNewSiteEvent" />
-  <SitesContentBox ref="sitesViewContentBox" />
+  <main class="sites">
+    <div class="container">
+      <h2 class="sites__title">Explore your created sites.</h2>
+      <SitesToolbar @createNewSiteEvent="handleCreateNewSiteEvent" />
+      <SitesContentBox ref="sitesViewContentBox" />
+    </div>
+  </main>
 </template>
 
 <script>
