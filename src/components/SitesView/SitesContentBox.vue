@@ -8,7 +8,6 @@
       :key="site.url"
       :ref="site.url"
       @killMe="deleteSiteCard"
-      @open-siblings="closeAnotherContextMenu"
     />
   </main>
   <div class="spread-text" v-else>You have not created any site yet...</div>
@@ -58,10 +57,6 @@ export default {
           site.url = `my-project-${index + 1}.tilda.prod`
         }
       })
-    },
-    closeAnotherContextMenu(url) {
-      console.log(this.$refs[url].hideContextMenu())
-      console.log(url)
     }
   },
   components: {
