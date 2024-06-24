@@ -1,6 +1,6 @@
 <template>
-  <h3 class="sites__title title">Your existing sites.</h3>
-  <main class="sites__content-wrapper">
+  <h3 class="sites__title title">Your existing sites:</h3>
+  <main v-if="this.sites.length > 0" class="sites__content-wrapper">
     <SitesSiteCard
       v-for="site in sites"
       :title="site.title"
@@ -11,6 +11,7 @@
       @open-siblings="closeAnotherContextMenu"
     />
   </main>
+  <div class="spread-text" v-else>You have not created any site yet...</div>
 </template>
 
 <script>
