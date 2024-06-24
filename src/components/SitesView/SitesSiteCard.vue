@@ -63,7 +63,6 @@ export default {
       }
     },
     redirectToEditor() {
-      console.log('ss')
       this.$router.push(`/editor/${this.url}`)
     }
   }
