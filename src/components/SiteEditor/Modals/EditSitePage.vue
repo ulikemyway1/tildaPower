@@ -166,6 +166,8 @@ export default {
     },
     setBadgeURL(event) {
       this.newBadgeURL = event.target?.src
+      this.resetActive(event.target)
+      event.target.classList.add('active')
     },
     saveNewBadge() {
       if (this.newBadgeURL !== '') {
@@ -174,6 +176,17 @@ export default {
           this.modalsStore.getEditPageID(),
           this.newBadgeURL
         )
+        this.modalsStore.toggleModalStatus('editSitePage')
+      }
+    },
+    resetActive(target) {
+      if (target instanceof HTMLElement) {
+        const parent = target.parentElement
+        for (const child of parent.children) {
+          if (child instanceof HTMLElement) {
+            child.classList.remove('active')
+          }
+        }
       }
     }
   },
