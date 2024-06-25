@@ -1,0 +1,118 @@
+<template>
+  <div class="modal" v-if="show">
+    <div class="modal-overlay" @click="closeModal"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
+        <h2>Change site page</h2>
+        <div class="modal-toggle">
+          <span>Main</span>
+          <span>Badge</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form v-if="openMain" class="modal-form-edit-main">
+          <label for="title" class="label"
+            >Page Title
+            <input
+              ref="title"
+              type="text"
+              name="title"
+              id="title"
+              class="input"
+              :value="
+                this.sitesStore.getPageTitle(
+                  this.modalsStore.getEditSiteID(),
+                  this.modalsStore.getEditPageID()
+                )
+              "
+              @input="checkValidation"
+            />
+          </label>
+
+          <label for="descr" class="label"
+            >Page Description
+            <input
+              ref="descr"
+              type="text"
+              name="descr"
+              id="descr"
+              class="input"
+              :value="
+                this.sitesStore.getPageDescr(
+                  this.modalsStore.getEditSiteID(),
+                  this.modalsStore.getEditPageID()
+                )
+              "
+              @input="checkValidation"
+            />
+          </label>
+
+          <label for="url" class="label"
+            >Page URL
+            <input
+              ref="url"
+              type="text"
+              name="url"
+              id="url"
+              class="input"
+              :value="
+                this.sitesStore.getPageURL(
+                  this.modalsStore.getEditSiteID(),
+                  this.modalsStore.getEditPageID()
+                )
+              "
+              @input="checkValidation"
+            />
+          </label>
+
+          <button @click.prevent="saveChanges" class="button save-domain">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapStores } from 'pinia'
+import { useModalsStore } from '@/stores/modalsStore'
+import { useSitesStore } from '@/stores/index'
+
+export default {
+  props: ['show', 'siteID'],
+  data() {
+    return {
+      currentDomainInput: '',
+      openMain: true
+    }
+  },
+  methods: {
+    closeModal() {
+      this.modalsStore.toggleModalStatus('editSitePage')
+    },
+    saveChanges() {
+      const newTitle = this.$refs.title.value
+      const newDescr = this.$refs.descr.value
+      const newURL = this.$refs.url.value
+      this.sitesStore.setPageTitle(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID(),
+        newTitle
+      )
+      this.sitesStore.setPageDescr(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID(),
+        newDescr
+      )
+      this.sitesStore.setPageURL(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID(),
+        newURL
+      )
+    }
+  },
+  computed: {
+    ...mapStores(useModalsStore, useSitesStore)
+  }
+}
+</script>

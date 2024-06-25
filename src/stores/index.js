@@ -12,11 +12,15 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '1-1',
-            title: 'New Default Page 1'
+            title: 'New Default Page 1',
+            descr: 'Page descr',
+            url: 'page-1'
           },
           {
             id: '1-2',
-            title: 'New Default Page 2'
+            title: 'New Default Page 2',
+            descr: 'Page descr',
+            url: 'page-2'
           }
         ]
       },
@@ -27,7 +31,9 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '2-1',
-            title: 'New Default Page'
+            title: 'New Default Page',
+            descr: 'Page descr',
+            url: 'page-1'
           }
         ]
       },
@@ -38,7 +44,9 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '3-1',
-            title: 'New Default Page'
+            title: 'New Default Page',
+            descr: 'Page descr',
+            url: 'page-1'
           }
         ]
       },
@@ -49,7 +57,9 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '4-1',
-            title: 'New Default Page'
+            title: 'New Default Page',
+            descr: 'Page descr',
+            url: 'page-1'
           }
         ]
       }
@@ -136,7 +146,8 @@ export const useSitesStore = defineStore('sites', {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
         const pageDescription = {
-          id: generateID()
+          id: generateID(),
+          descr: 'Page descr'
         }
         Object.assign(pageDescription, pageDescriptionObject)
         targetSite.pages.push(pageDescription)
@@ -155,12 +166,70 @@ export const useSitesStore = defineStore('sites', {
     _findSite(targetID) {
       return this.sites.find((site) => site.id === targetID)
     },
+    _findPage(targetSite, pageID) {
+      return targetSite.pages.find((page) => page.id === pageID)
+    },
     updateDefaultPageTitle(targetSite) {
       targetSite.pages.forEach((page, index) => {
         if (page.title.includes('New Default Page')) {
           page.title = `New Default Page ${index + 1}`
         }
       })
+    },
+
+    getPageTitle(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          return targetPage.title
+        }
+      }
+    },
+    setPageTitle(siteID, pageID, newTitle) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          targetPage.title = newTitle
+        }
+      }
+    },
+    getPageDescr(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          return targetPage.descr
+        }
+      }
+    },
+    setPageDescr(siteID, pageID, newDescr) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          targetPage.descr = newDescr
+        }
+      }
+    },
+    getPageURL(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          return targetPage.url
+        }
+      }
+    },
+    setPageURL(siteID, pageID, newURL) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          targetPage.url = newURL
+        }
+      }
     }
   }
 })

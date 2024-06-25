@@ -3,7 +3,10 @@ import { defineStore } from 'pinia'
 export const useModalsStore = defineStore('modals', {
   state: () => ({
     modals: {
-      domain: false
+      domain: false,
+      editSitePage: false,
+      editSiteID: '',
+      editPageID: ''
     }
   }),
   actions: {
@@ -17,6 +20,18 @@ export const useModalsStore = defineStore('modals', {
         return targetModal
       }
       return false
+    },
+    setEditSiteID(id) {
+      this.editSiteID = id
+    },
+    setEditPageID(id) {
+      this.editPageID = id
+    },
+    getEditSiteID() {
+      return this.editSiteID
+    },
+    getEditPageID() {
+      return this.editPageID
     }
   }
 })
