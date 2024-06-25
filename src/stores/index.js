@@ -12,7 +12,7 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '1-1',
-            title: 'New Default Page'
+            title: 'New Default Page 1'
           },
           {
             id: '1-2',
