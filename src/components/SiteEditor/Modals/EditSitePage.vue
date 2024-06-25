@@ -6,8 +6,20 @@
         <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
         <h2>Change site page</h2>
         <div class="modal-toggle">
-          <span class="modal-toggle__item active" tabindex="0" @click="openMainTab">Main</span>
-          <span class="modal-toggle__item" tabindex="0" @click="openBadgeTab">Badge</span>
+          <span
+            class="modal-toggle__item"
+            :class="this.openMain ? 'active' : ''"
+            tabindex="0"
+            @click="openMainTab"
+            >Main</span
+          >
+          <span
+            class="modal-toggle__item"
+            :class="this.openBadge ? 'active' : ''"
+            tabindex="0"
+            @click="openBadgeTab"
+            >Badge</span
+          >
         </div>
       </div>
       <div class="modal-body">
