@@ -88,10 +88,18 @@
         </KeepAlive>
         <KeepAlive>
           <form :is="openBadge" v-if="openBadge" class="modal-form-edit-main">
-            <button @click.prevent="saveChanges" class="button save-changes">Save changes</button>
-            <Transition v-if="notValid">
-              <span class="validation-error">Please, fill all fields</span>
-            </Transition>
+            <div class="badges-wrapper">
+              <img
+                v-for="img in this.images"
+                :key="img"
+                :src="img"
+                alt="Image Badge"
+                class="image-badge"
+                @click="setBadgeURL"
+              />
+            </div>
+
+            <button @click.prevent="saveNewBadge" class="button save-changes">Save changes</button>
           </form>
         </KeepAlive>
       </div>
@@ -103,6 +111,7 @@
 import { mapStores } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
 import { useSitesStore } from '@/stores/index'
+import fetchBadges from '@/api/fetchBadges'
 
 export default {
   props: ['show', 'siteID'],
@@ -111,7 +120,9 @@ export default {
       currentDomainInput: '',
       openMain: true,
       openBadge: false,
-      notValid: false
+      notValid: false,
+      images: [],
+      newBadgeURL: ''
     }
   },
   methods: {
@@ -152,10 +163,25 @@ export default {
     openBadgeTab() {
       this.openMain = false
       this.openBadge = true
+    },
+    setBadgeURL(event) {
+      this.newBadgeURL = event.target?.src
+    },
+    saveNewBadge() {
+      if (this.newBadgeURL !== '') {
+        this.sitesStore.setPageBadge(
+          this.modalsStore.getEditSiteID(),
+          this.modalsStore.getEditPageID(),
+          this.newBadgeURL
+        )
+      }
     }
   },
   computed: {
     ...mapStores(useModalsStore, useSitesStore)
+  },
+  async mounted() {
+    this.images = await fetchBadges()
   }
 }
 </script>

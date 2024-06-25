@@ -60,4 +60,22 @@
   .modal-toggle__item.active:hover {
     background: $tab-active-hover;
   }
+
+  .badges-wrapper .image-badge:hover {
+    outline: 2px solid $tab-active;
+  }
+}
+
+.badges-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+
+  .image-badge {
+    width: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+  }
 }

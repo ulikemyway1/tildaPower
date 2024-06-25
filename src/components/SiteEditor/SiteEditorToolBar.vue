@@ -37,7 +37,8 @@ export default {
       const pageDescriptionObject = {
         title: `New Default Page  ${index}`,
         descr: 'New Default Page Descr',
-        url: `new-page-${index}`
+        url: `new-page-${index}`,
+        badgeURL: ''
       }
       this.sitesStore.addSitePage(id, pageDescriptionObject)
     },

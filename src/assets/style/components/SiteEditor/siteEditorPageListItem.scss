@@ -35,7 +35,7 @@
       background-repeat: no-repeat;
       background-size: contain;
       &.bg-1 {
-        background-image: url('../../../../data/images/cat2.jpeg');
+        background-image: url('../../../../data/images/cat2.jpeg') !important;
       }
       &.bg-2 {
         background-image: url('../../../../data/images/cat3.jpeg');

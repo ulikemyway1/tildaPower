@@ -14,13 +14,15 @@ export const useSitesStore = defineStore('sites', {
             id: '1-1',
             title: 'New Default Page 1',
             descr: 'Page descr',
-            url: 'page-1'
+            url: 'page-1',
+            badgeURL: ''
           },
           {
             id: '1-2',
             title: 'New Default Page 2',
             descr: 'Page descr',
-            url: 'page-2'
+            url: 'page-2',
+            badgeURL: ''
           }
         ]
       },
@@ -33,7 +35,8 @@ export const useSitesStore = defineStore('sites', {
             id: '2-1',
             title: 'New Default Page',
             descr: 'Page descr',
-            url: 'page-1'
+            url: 'page-1',
+            badgeURL: ''
           }
         ]
       },
@@ -46,7 +49,8 @@ export const useSitesStore = defineStore('sites', {
             id: '3-1',
             title: 'New Default Page',
             descr: 'Page descr',
-            url: 'page-1'
+            url: 'page-1',
+            badgeURL: ''
           }
         ]
       },
@@ -59,7 +63,8 @@ export const useSitesStore = defineStore('sites', {
             id: '4-1',
             title: 'New Default Page',
             descr: 'Page descr',
-            url: 'page-1'
+            url: 'page-1',
+            badgeURL: ''
           }
         ]
       }
@@ -235,6 +240,24 @@ export const useSitesStore = defineStore('sites', {
         const targetPage = this._findPage(targetSite, pageID)
         if (targetPage) {
           targetPage.url = newURL
+        }
+      }
+    },
+    getPageBadge(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          return targetPage.badgeURL
+        }
+      }
+    },
+    setPageBadge(siteID, pageID, newBadgeURL) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          targetPage.badgeURL = newBadgeURL
         }
       }
     }

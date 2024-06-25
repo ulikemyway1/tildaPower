@@ -1,6 +1,12 @@
 <template>
   <li class="page-list__item">
-    <div class="page__badge bg-1 clickable" tabindex="0" @click="goToPageEdit"></div>
+    <div
+      class="page__badge clickable"
+      :style="`background-image:url(${this.sitesStore.getPageBadge(this.belongTo, this.pageID)})`"
+      :class="this.sitesStore.getPageBadge(this.belongTo, this.pageID) ? '' : 'bg-1'"
+      tabindex="0"
+      @click="goToPageEdit"
+    ></div>
     <div class="page__title">
       <span @click="goToPageEdit" class="clickable">{{ title }}</span>
     </div>
