@@ -1,6 +1,6 @@
 <template>
   <div class="site-editor__header">
-    <a href="#" class="link add-domain">Link a domain</a>
+    <a href="#" class="link add-domain" @click="openDomainModal">Link a domain</a>
     <div class="site-url">
       <span
         >Site address:
@@ -23,21 +23,24 @@
 <script>
 import { mapStores } from 'pinia'
 import { useSitesStore } from '@/stores/index'
+import { useModalsStore } from '@/stores/modalsStore'
 export default {
   props: {
     siteID: String
   },
   computed: {
-    ...mapStores(useSitesStore)
+    ...mapStores(useSitesStore, useModalsStore)
   },
   methods: {
     createNewPage(id) {
-      console.log(id)
       const index = this.sitesStore.getSitePagesAmount(id) + 1
       const pageDescriptionObject = {
         title: `New Default Page  ${index}`
       }
       this.sitesStore.addSitePage(id, pageDescriptionObject)
+    },
+    openDomainModal() {
+      this.modalsStore.toggleModalStatus('domain')
     }
   }
 }
