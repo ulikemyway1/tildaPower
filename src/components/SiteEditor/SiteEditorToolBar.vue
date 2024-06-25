@@ -14,7 +14,9 @@
       <span>Project Title:</span>
       {{ this.sitesStore.getSiteTitle(this.siteID) }}
     </div>
-    <button class="button create-new-page-btn">Create a new page</button>
+    <button class="button create-new-page-btn" @click="createNewPage(this.siteID)">
+      Create a new page
+    </button>
   </div>
 </template>
 
@@ -27,6 +29,16 @@ export default {
   },
   computed: {
     ...mapStores(useSitesStore)
+  },
+  methods: {
+    createNewPage(id) {
+      console.log(id)
+      const index = this.sitesStore.getSitePagesAmount(id) + 1
+      const pageDescriptionObject = {
+        title: `Page ${index}`
+      }
+      this.sitesStore.addSitePage(id, pageDescriptionObject)
+    }
   }
 }
 </script>

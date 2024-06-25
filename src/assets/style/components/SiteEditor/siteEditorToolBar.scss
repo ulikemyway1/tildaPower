@@ -13,9 +13,11 @@
     }
 
     .create-new-page-btn {
-      max-width: 200px;
-      max-height: 80px;
+      padding: 10px 15px;
+      max-width: 300px;
+      font-size: 30px;
       margin-left: auto;
+      height: min-content;
     }
 
     .site-title {

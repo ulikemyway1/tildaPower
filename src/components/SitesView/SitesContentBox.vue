@@ -28,7 +28,13 @@ export default {
       const newSiteDescr = {
         id: generateID(),
         title: this.siteTitle,
-        url: `my-project-${this.calcIndex()}.tilda.prod`
+        url: `my-project-${this.calcIndex()}.tilda.prod`,
+        pages: [
+          {
+            pageID: `${this.id}-${generateID()}`,
+            title: 'Page'
+          }
+        ]
       }
       this.sitesStore.addSite(newSiteDescr)
     },

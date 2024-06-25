@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import generateID from '@/helpers/generateID'
 
 export const useSitesStore = defineStore('sites', {
   state: () => ({
@@ -7,22 +8,50 @@ export const useSitesStore = defineStore('sites', {
       {
         id: '1',
         title: 'Potato jam',
-        url: 'potato-jam.tilda.io'
+        url: 'potato-jam.tilda.io',
+        pages: [
+          {
+            id: '1-1',
+            title: 'Page'
+          },
+          {
+            id: '1-2',
+            title: 'Page 2'
+          }
+        ]
       },
       {
         id: '2',
         title: 'My project 2',
-        url: 'project-2.tilda.io'
+        url: 'project-2.tilda.io',
+        pages: [
+          {
+            id: '2-1',
+            title: 'Page'
+          }
+        ]
       },
       {
         id: '3',
         title: 'My project 3',
-        url: 'project-3.tilda.io'
+        url: 'project-3.tilda.io',
+        pages: [
+          {
+            id: '3-1',
+            title: 'Page'
+          }
+        ]
       },
       {
         id: '4',
         title: 'My project 4',
-        url: 'project-4.tilda.io'
+        url: 'project-4.tilda.io',
+        pages: [
+          {
+            id: '4-1',
+            title: 'Page'
+          }
+        ]
       }
     ]
   }),
@@ -91,10 +120,26 @@ export const useSitesStore = defineStore('sites', {
       }
     },
 
-    addSitePage(siteID, pageID, pageDescriptionObject) {
+    getSitePages(siteID) {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
-        targetSite.pages[pageID] = pageDescriptionObject
+        return targetSite.pages
+      }
+    },
+    getSitePagesAmount(siteID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        return targetSite.pages.length
+      }
+    },
+    addSitePage(siteID, pageDescriptionObject) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const pageDescription = {
+          id: generateID()
+        }
+        Object.assign(pageDescription, pageDescriptionObject)
+        targetSite.pages.push(pageDescription)
       }
     },
     _findSite(targetID) {
