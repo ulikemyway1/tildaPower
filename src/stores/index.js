@@ -12,11 +12,11 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '1-1',
-            title: 'Page'
+            title: 'New Default Page'
           },
           {
             id: '1-2',
-            title: 'Page 2'
+            title: 'New Default Page 2'
           }
         ]
       },
@@ -27,7 +27,7 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '2-1',
-            title: 'Page'
+            title: 'New Default Page'
           }
         ]
       },
@@ -38,7 +38,7 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '3-1',
-            title: 'Page'
+            title: 'New Default Page'
           }
         ]
       },
@@ -49,7 +49,7 @@ export const useSitesStore = defineStore('sites', {
         pages: [
           {
             id: '4-1',
-            title: 'Page'
+            title: 'New Default Page'
           }
         ]
       }
@@ -142,8 +142,25 @@ export const useSitesStore = defineStore('sites', {
         targetSite.pages.push(pageDescription)
       }
     },
+    deleteSitePage(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const index = targetSite.pages.findIndex((page) => page.id === pageID)
+        if (index !== -1) {
+          targetSite.pages.splice(index, 1)
+          this.updateDefaultPageTitle(targetSite)
+        }
+      }
+    },
     _findSite(targetID) {
       return this.sites.find((site) => site.id === targetID)
+    },
+    updateDefaultPageTitle(targetSite) {
+      targetSite.pages.forEach((page, index) => {
+        if (page.title.includes('New Default Page')) {
+          page.title = `New Default Page ${index + 1}`
+        }
+      })
     }
   }
 })

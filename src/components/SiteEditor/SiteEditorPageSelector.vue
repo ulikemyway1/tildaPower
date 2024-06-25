@@ -1,12 +1,15 @@
 <template>
   <main>
-    <ul class="page-list">
+    <ul v-if="this.sitesStore.getSitePages(this.siteID).length !== 0" class="page-list">
       <SiteEditorPageListItem
         v-for="page in this.sitesStore.getSitePages(this.siteID)"
         :key="page.id"
         :title="page.title"
+        :pageID="page.id"
+        :belongTo="this.siteID"
       />
     </ul>
+    <span v-else class="no-pages">No pages yet...</span>
   </main>
 </template>
 
