@@ -35,7 +35,9 @@ export default {
     createNewPage(id) {
       const index = this.sitesStore.getSitePagesAmount(id) + 1
       const pageDescriptionObject = {
-        title: `New Default Page  ${index}`
+        title: `New Default Page  ${index}`,
+        descr: 'New Default Page Descr',
+        url: `new-page-${index}`
       }
       this.sitesStore.addSitePage(id, pageDescriptionObject)
     },

@@ -146,8 +146,7 @@ export const useSitesStore = defineStore('sites', {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
         const pageDescription = {
-          id: generateID(),
-          descr: 'Page descr'
+          id: generateID()
         }
         Object.assign(pageDescription, pageDescriptionObject)
         targetSite.pages.push(pageDescription)
@@ -160,6 +159,7 @@ export const useSitesStore = defineStore('sites', {
         if (index !== -1) {
           targetSite.pages.splice(index, 1)
           this.updateDefaultPageTitle(targetSite)
+          this.updateDefaultPageURL(targetSite)
         }
       }
     },
@@ -173,6 +173,13 @@ export const useSitesStore = defineStore('sites', {
       targetSite.pages.forEach((page, index) => {
         if (page.title.includes('New Default Page')) {
           page.title = `New Default Page ${index + 1}`
+        }
+      })
+    },
+    updateDefaultPageURL(targetSite) {
+      targetSite.pages.forEach((page, index) => {
+        if (page.url.includes('new-page-')) {
+          page.url = `new-page-${index + 1}`
         }
       })
     },
