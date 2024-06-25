@@ -26,6 +26,7 @@
 }
 
 .modal-toggle {
+    margin-top: 20px;
   position: relative;
   display: flex;
   gap: 20px;
@@ -82,4 +83,11 @@
       outline: 2px solid $tab-active;
     }
   }
+}
+
+@media (max-width: 470px) {
+    .modal.page-edit h2 {
+        font-size: 36px;
+     }
+
 }

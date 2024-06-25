@@ -54,6 +54,12 @@
   }
 }
 
+@media (min-width: 1400px) {
+  .page-list .page__title  {
+    width: 500px;
+  }
+}
+
 @media (max-width: 800px) {
   .page-list {
     .button-wrapper {
@@ -79,3 +85,5 @@
     }
   }
 }
+
+
