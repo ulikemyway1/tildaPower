@@ -1,0 +1,109 @@
+.header {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  height: 80px;
+  padding: 10px 20px;
+  background: $black-text;
+
+  &__logo {
+    width: 40px;
+    color: $white-text;
+
+    a {
+      color: $white-text;
+      text-decoration: none;
+    }
+  }
+
+  &__nav {
+    height: 100%;
+    font-size: 24px;
+  }
+
+  &__nav-ul {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    color: $white-text;
+    list-style-type: none;
+  }
+
+  &__nav-li {
+    color: inherit;
+
+    a {
+      color: inherit;
+      position: relative;
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        display: block;
+        width: 100%;
+        height: 3px;
+        border-radius: 1px;
+        background-color: $white-text;
+        transform: scale(0);
+        opacity: 0;
+        transition:
+          transform 0.4s,
+          opacity 0.4s,
+          background 0.4s;
+      }
+    }
+  }
+}
+
+.router-link-exact-active {
+  &::after {
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 24px;
+  color: $white-text;
+}
+
+.last-content-wrapper {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 780px) {
+  .user__name {
+    display: none;
+  }
+
+  .header {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .user {
+    display: none;
+  }
+
+  .header__nav-ul {
+    gap: 15px;
+  }
+  .button.logout-btn {
+    font-size: 14px;
+  }
+
+  .header {
+    gap: 20px;
+  }
+}

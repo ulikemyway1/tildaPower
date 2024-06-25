@@ -1,0 +1,23 @@
+body {
+  font-family: Jost;
+}
+
+.link {
+  color: $white-text;
+  transition: color 0.6s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: $white-text-hover;
+    &::after {
+      background: $white-text-hover !important;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 15px;
+}

@@ -29,9 +29,5 @@ coverage
 
 *.tsbuildinfo
 
-# Build
-
-public
-
 # VS Code
 .vscode
