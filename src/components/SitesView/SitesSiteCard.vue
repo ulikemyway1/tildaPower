@@ -35,6 +35,7 @@ export default {
     }
   },
   props: {
+    id: String,
     title: String,
     url: String
   },
@@ -47,7 +48,7 @@ export default {
 
   methods: {
     killMe() {
-      this.$emit('killMe', this.url)
+      this.$emit('killMe', this.id)
       this.hideContextMenu()
     },
     showContextMenu() {
