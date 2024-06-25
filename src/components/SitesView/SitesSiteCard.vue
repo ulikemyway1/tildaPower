@@ -64,7 +64,7 @@ export default {
       }
     },
     redirectToEditor() {
-      this.$router.push(`/editor/${this.url}`)
+      this.$router.push(`/editor/${this.id}`)
     }
   }
 }

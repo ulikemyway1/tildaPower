@@ -3,7 +3,7 @@
   <main v-if="this.sitesStore.getSites().length > 0" class="sites__content-wrapper">
     <KeepAlive>
       <SitesSiteCard
-        v-for="(site, index) in this.sitesStore.getSites()"
+        v-for="site in this.sitesStore.getSites()"
         :key="site.id"
         :title="site.title"
         :id="site.id"

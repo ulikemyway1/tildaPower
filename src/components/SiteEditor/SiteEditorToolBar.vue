@@ -1,13 +1,20 @@
 <template>
   <div class="site-editor__header">
-    <a href="#" class="add-domain">Link a domain</a>
+    <a href="#" class="link add-domain">Link a domain</a>
     <div class="site-url">
-      <span>Site address:</span>
-      <span>Site title:</span>
+      <span
+        >Site address:
+        <a :href="this.sitesStore.getSiteURL(this.siteID)" class="link site-url__link">{{
+          this.sitesStore.getSiteURL(this.siteID)
+        }}</a></span
+      >
+      <span></span>
     </div>
-    <div class="site-title">{{ siteTitle }}</div>
+    <div class="site-title">
+      <span>Project Title:</span>
+      {{ this.sitesStore.getSiteTitle(this.siteID) }}
+    </div>
     <button class="button create-new-page-btn">Create a new page</button>
-    <span>{{ this.sitesStore.getSitesTotal() }}</span>
   </div>
 </template>
 
@@ -16,8 +23,7 @@ import { mapStores } from 'pinia'
 import { useSitesStore } from '@/stores/index'
 export default {
   props: {
-    siteTitle: String,
-    siteURL: String
+    siteID: String
   },
   computed: {
     ...mapStores(useSitesStore)

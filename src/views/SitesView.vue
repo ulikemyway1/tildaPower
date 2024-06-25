@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     handleCreateNewSiteEvent() {
-      console.log('parent hello')
       this.$refs.sitesViewContentBox.createNewSite()
     }
   }

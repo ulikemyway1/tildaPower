@@ -1,6 +1,5 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import generateID from '@/helpers/generateID'
 
 export const useSitesStore = defineStore('sites', {
   state: () => ({
@@ -32,7 +31,7 @@ export const useSitesStore = defineStore('sites', {
       return this.sites.length
     },
     getSites() {
-      return Object.values(this.sites)
+      return this.sites
     },
     addSite(siteDescriptionObject) {
       this.sites.push(siteDescriptionObject)
@@ -53,11 +52,29 @@ export const useSitesStore = defineStore('sites', {
         }
       })
     },
-
+    getSiteTitle(siteID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        return targetSite.title
+      }
+    },
     changeSiteTitle(siteID, newTitle) {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
         targetSite.title = newTitle
+      }
+    },
+
+    getSiteURL(siteID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        return targetSite.url
+      }
+    },
+    changeSiteURL(siteID, newURL) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        targetSite.url = newURL
       }
     },
 
@@ -73,6 +90,7 @@ export const useSitesStore = defineStore('sites', {
         targetSite.descr = newDescr
       }
     },
+
     addSitePage(siteID, pageID, pageDescriptionObject) {
       const targetSite = this._findSite(siteID)
       if (targetSite) {

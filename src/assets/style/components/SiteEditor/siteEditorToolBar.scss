@@ -1,0 +1,36 @@
+.site-editor {
+  background: $gray-bg;
+
+  &__header {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 150px 150px;
+    justify-content: space-between;
+
+    .add-domain {
+      color: $options-text;
+    }
+
+    .create-new-page-btn {
+      max-width: 200px;
+      max-height: 80px;
+      margin-left: auto;
+    }
+
+    .site-title {
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .site-url {
+      text-align: right;
+      font-size: 20px;
+      font-style: italic;
+
+      &__link {
+        color: $black-text;
+      }
+    }
+  }
+}
