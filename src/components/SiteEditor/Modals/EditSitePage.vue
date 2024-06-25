@@ -67,6 +67,9 @@
           </label>
 
           <button @click.prevent="saveChanges" class="button save-domain">Save changes</button>
+          <Transition v-if="notValid">
+            <span class="validation-error">Please, fill all fields</span>
+          </Transition>
         </form>
       </div>
     </div>
@@ -83,7 +86,8 @@ export default {
   data() {
     return {
       currentDomainInput: '',
-      openMain: true
+      openMain: true,
+      notValid: false
     }
   },
   methods: {
@@ -94,21 +98,28 @@ export default {
       const newTitle = this.$refs.title.value
       const newDescr = this.$refs.descr.value
       const newURL = this.$refs.url.value
-      this.sitesStore.setPageTitle(
-        this.modalsStore.getEditSiteID(),
-        this.modalsStore.getEditPageID(),
-        newTitle
-      )
-      this.sitesStore.setPageDescr(
-        this.modalsStore.getEditSiteID(),
-        this.modalsStore.getEditPageID(),
-        newDescr
-      )
-      this.sitesStore.setPageURL(
-        this.modalsStore.getEditSiteID(),
-        this.modalsStore.getEditPageID(),
-        newURL
-      )
+      const allValid = newTitle.length > 0 && newDescr.length > 0 && newURL.length > 0
+      if (allValid) {
+        this.sitesStore.setPageTitle(
+          this.modalsStore.getEditSiteID(),
+          this.modalsStore.getEditPageID(),
+          newTitle
+        )
+        this.sitesStore.setPageDescr(
+          this.modalsStore.getEditSiteID(),
+          this.modalsStore.getEditPageID(),
+          newDescr
+        )
+        this.sitesStore.setPageURL(
+          this.modalsStore.getEditSiteID(),
+          this.modalsStore.getEditPageID(),
+          newURL
+        )
+        this.notValid = false
+        this.modalsStore.toggleModalStatus('editSitePage')
+      } else {
+        this.notValid = true
+      }
     }
   },
   computed: {
