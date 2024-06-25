@@ -9,7 +9,6 @@ export const useModalsStore = defineStore('modals', {
   actions: {
     toggleModalStatus(modal) {
       this.modals[modal] = !this.modals[modal]
-      console.log(this.modals[modal])
     },
 
     getModalStatus(modal) {
