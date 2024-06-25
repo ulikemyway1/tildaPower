@@ -9,14 +9,21 @@
       >
         Edit Main
       </button>
+
+      <SiteEditorToolBar />
     </div>
   </main>
 </template>
 
 <script>
+import SiteEditorToolBar from '@/components/SiteEditor/SiteEditorToolBar.vue'
+
 export default {
   props: {
     id: String
+  },
+  components: {
+    SiteEditorToolBar
   }
 }
 </script>
