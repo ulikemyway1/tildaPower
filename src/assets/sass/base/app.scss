@@ -2,9 +2,9 @@ body {
   font-family: Jost;
 }
 
-body:has(.modal) {
-  overflow-y: hidden;
-}
+// body:has(.modal) {
+//   overflow-y: hidden;
+// }
 
 .link {
   color: $white-text;
