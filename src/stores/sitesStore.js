@@ -16,16 +16,15 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: {
-              id1: ['<h2>Hello</h2>']
-            }
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           },
           {
             id: '1-2',
             title: 'New Default Page 2',
             descr: 'Page descr',
             url: 'page-2',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           }
         ]
       },
@@ -39,7 +38,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           }
         ]
       },
@@ -53,7 +53,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           }
         ]
       },
@@ -67,7 +68,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           }
         ]
       }
@@ -277,6 +279,13 @@ export const useSitesStore = defineStore('sites', {
     },
     setEditingSiteID(siteID) {
       this.editingSiteID = siteID
+    },
+    getPageContentObject(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        return targetPage.pageContent
+      }
     }
   }
 })

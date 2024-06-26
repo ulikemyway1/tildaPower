@@ -39,7 +39,8 @@ export default {
         title: `New Default Page  ${index}`,
         descr: 'New Default Page Descr',
         url: `new-page-${index}`,
-        badgeURL: ''
+        badgeURL: '',
+        pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
       }
       this.sitesStore.addSitePage(id, pageDescriptionObject)
     },
