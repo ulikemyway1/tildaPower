@@ -11,26 +11,15 @@
           v-for="category of this.toolbarStore.getCategoriesList()"
           :key="category"
           class="toolbar-menu__list-item"
+          :class="{ active: currentTabID === category.componentsID }"
+          :id="`toggle-${category.componentsID}`"
+          @click="toggleCategory"
         >
-          {{ category }}
+          {{ category.title }}
         </li>
       </ul>
     </div>
-    <div class="toolbar__content">
-      <ol
-        v-for="setID of this.toolbarStore.getComponentsSetList()"
-        :key="setID"
-        :id="setID"
-        class="toolbar-category-wrapper"
-      >
-        <li v-for="setItem of this.toolbarStore.getComponentsSetItems(setID)">
-          <div class="component-description-wrapper">
-            <span class="component-title">{{ setItem.title }}</span>
-            <span class="component-descr">{{ setItem.descr }}</span>
-          </div>
-        </li>
-      </ol>
-    </div>
+    <div class="toolbar__content" ref="toolbarContent"></div>
   </main>
 </template>
 
@@ -39,8 +28,64 @@ import { mapStores } from 'pinia'
 import { useToolbarStore } from '@/stores/toolbarStore'
 
 export default {
+  data() {
+    return {
+      currentTabID: 's'
+    }
+  },
+  methods: {
+    toggleCategory(event) {
+      const tab = event.target
+      if (tab instanceof HTMLElement) {
+        const tabID = tab.id.split('-')[1]
+        this.currentTabID = tabID
+        this.renderCategoryTools(tabID)
+      }
+    },
+    renderCategoryTools(categoryID) {
+      const toolbarContent = this.$refs.toolbarContent
+      while (toolbarContent.lastElementChild) {
+        toolbarContent.lastElementChild.remove()
+      }
+
+      const ol = document.createElement('ol')
+
+      for (const setItem of this.toolbarStore.getComponentsSetItems(categoryID)) {
+        const li = document.createElement('li')
+        const div = document.createElement('div')
+
+        div.classList.add('component-description-wrapper')
+
+        const spanTitle = document.createElement('span')
+        spanTitle.classList.add('component-title')
+        spanTitle.textContent = setItem.title
+
+        const spanDescr = document.createElement('span')
+        spanDescr.classList.add('component-descr')
+        spanDescr.textContent = setItem.descr
+
+        div.append(spanTitle, spanDescr)
+        li.append(div)
+
+        li.addEventListener
+
+        ol.append(li)
+      }
+
+      toolbarContent.append(ol)
+    }
+  },
   computed: {
-    ...mapStores(useToolbarStore)
+    ...mapStores(useToolbarStore),
+    shouldRender(setID) {
+      return this.currentTab === setID
+    }
+  },
+  mounted() {
+    const toolbarContent = this.$refs.toolbarContent
+    if (toolbarContent instanceof HTMLElement) {
+      const toolbarCaregories = toolbarContent.querySelectorAll('.toolbar-category-wrapper')
+    }
   }
 }
 </script>
