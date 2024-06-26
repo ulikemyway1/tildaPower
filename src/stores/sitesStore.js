@@ -15,7 +15,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page 1',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: ['<h1>Hello</h1>']
           },
           {
             id: '1-2',
@@ -68,7 +69,9 @@ export const useSitesStore = defineStore('sites', {
           }
         ]
       }
-    ]
+    ],
+    editingSiteID: undefined,
+    editingPageID: undefined
   }),
   actions: {
     getSitesTotal() {
@@ -260,6 +263,18 @@ export const useSitesStore = defineStore('sites', {
           targetPage.badgeURL = newBadgeURL
         }
       }
+    },
+    getEditingPageID() {
+      return this.editingPageID
+    },
+    setEditingPageID(pageID) {
+      this.editingPageID = pageID
+    },
+    getEditingSiteID() {
+      return this.editingSiteID
+    },
+    setEditingSiteID(siteID) {
+      this.editingSiteID = siteID
     }
   }
 })

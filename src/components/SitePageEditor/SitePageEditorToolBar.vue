@@ -71,7 +71,9 @@ export default {
         div.append(spanTitle, spanDescr)
         li.append(div)
 
-        li.addEventListener
+        li.addEventListener('click', () => {
+          console.log(setItem.html)
+        })
 
         ol.append(li)
       }

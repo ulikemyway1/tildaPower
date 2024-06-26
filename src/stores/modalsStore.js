@@ -15,6 +15,10 @@ export const useModalsStore = defineStore('modals', {
       this.modals[modal] = !this.modals[modal]
     },
 
+    hideModal(modal) {
+      this.modals[modal] = false
+    },
+
     getModalStatus(modal) {
       const targetModal = this.modals[modal]
       if (targetModal) {
