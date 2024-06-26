@@ -134,22 +134,12 @@ export default {
       const newDescr = this.$refs.descr.value
       const newURL = this.$refs.url.value
       const allValid = newTitle.length > 0 && newDescr.length > 0 && newURL.length > 0
+      const siteID = this.modalsStore.getEditSiteID()
+      const pageID = this.modalsStore.getEditPageID()
       if (allValid) {
-        this.sitesStore.setPageTitle(
-          this.modalsStore.getEditSiteID(),
-          this.modalsStore.getEditPageID(),
-          newTitle
-        )
-        this.sitesStore.setPageDescr(
-          this.modalsStore.getEditSiteID(),
-          this.modalsStore.getEditPageID(),
-          newDescr
-        )
-        this.sitesStore.setPageURL(
-          this.modalsStore.getEditSiteID(),
-          this.modalsStore.getEditPageID(),
-          newURL
-        )
+        this.sitesStore.setPageTitle(siteID, pageID, newTitle)
+        this.sitesStore.setPageDescr(siteID, pageID, newDescr)
+        this.sitesStore.setPageURL(siteID, pageID, newURL)
         this.notValid = false
         this.modalsStore.toggleModalStatus('editSitePage')
       } else {
@@ -171,11 +161,9 @@ export default {
     },
     saveNewBadge() {
       if (this.newBadgeURL !== '') {
-        this.sitesStore.setPageBadge(
-          this.modalsStore.getEditSiteID(),
-          this.modalsStore.getEditPageID(),
-          this.newBadgeURL
-        )
+        const siteID = this.modalsStore.getEditSiteID()
+        const pageID = this.modalsStore.getEditPageID()
+        this.sitesStore.setPageBadge(siteID, pageID, this.newBadgeURL)
         this.modalsStore.toggleModalStatus('editSitePage')
       }
     },
