@@ -17,15 +17,19 @@ export const useToolbarStore = defineStore('toolbar', {
         {
           title: 'Text paragraph',
           descr: 'Simple text paragraph',
-          html: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur gravida ante vel molestie. Quisque sed bibendum massa. Integer non sem dictum metus maximus scelerisque non id magna. Suspendisse vestibulum, diam et fermentum sollicitudin, ipsum lorem volutpat sem, sed tristique tortor mi ut sem. Mauris at fringilla augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris convallis, justo a semper condimentum, quam augue venenatis tortor, a dignissim magna mauris vel elit.</p>`
+          type: 'paragraph',
+          tag: 'p',
+          textContent: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur gravida ante vel molestie. Quisque sed bibendum massa. Integer non sem dictum metus maximus scelerisque non id magna. Suspendisse vestibulum, diam et fermentum sollicitudin, ipsum lorem volutpat sem, sed tristique tortor mi ut sem. Mauris at fringilla augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris convallis, justo a semper condimentum, quam augue venenatis tortor, a dignissim magna mauris vel elit.`
         }
       ],
       set_2: [
         {
           title: 'Text block with image',
+          type: 'text-block-with-image',
           descr: 'Text block with image is a good choice to make stylish pages!',
-          html: `<div style="background-image: url(});">Lorem ipsum...</div>`,
-          imgSrc: ''
+          textContent: 'Lorem ipsum...',
+          imgSrc: '',
+          tag: 'div'
         }
       ]
     }

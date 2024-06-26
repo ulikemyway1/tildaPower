@@ -16,7 +16,7 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           },
           {
             id: '1-2',
@@ -24,7 +24,7 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-2',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -39,7 +39,7 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -54,7 +54,7 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -69,7 +69,7 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       }
@@ -285,6 +285,20 @@ export const useSitesStore = defineStore('sites', {
       if (targetSite) {
         const targetPage = this._findPage(targetSite, pageID)
         return targetPage.pageContent
+      }
+    },
+    addPageContentObject(siteID, pageID, pageObjectDescr) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        const index = targetPage.pageContent.length
+        const newPageContentObject = {
+          id: index,
+          type: pageObjectDescr.type,
+          textContent: pageObjectDescr.textContent,
+          tag: pageObjectDescr.tag
+        }
+        targetPage.pageContent.push(newPageContentObject)
       }
     }
   }

@@ -1,9 +1,13 @@
 <template>
   <main class="page-editor__content">
     <div class="rendered-page-wrapper" ref="renderedPageWrapper">
-      <!-- <div v-for="(contentObject) of this.sitesStore.getPageContentObject(this.siteID, this.pageID)" class="div">
-            {{ contentObject.html }}
-         </div> -->
+      <component
+        :id="`custom-${blockObject.id}`"
+        v-for="blockObject in pageContent"
+        :key="blockObject.id"
+        :is="blockObject.tag"
+        >{{ blockObject.textContent }}</component
+      >
     </div>
     <button class="button add-block-btn" @click="toggleMenu">Add new block</button>
     <SitePageEditorToolBar />
@@ -20,7 +24,8 @@ export default {
     return {
       menuIsShown: false,
       pageID: '',
-      siteID: ''
+      siteID: '',
+      pageContentUpdateObserver: this.pageContent
     }
   },
   components: {
@@ -29,21 +34,23 @@ export default {
   methods: {
     toggleMenu() {
       this.modalsStore.toggleModalStatus('toolbar')
+    },
+    createElement() {
+      const div = document.createElement('h2')
+      div.textContent = 'Heksksks'
+      return div
     }
   },
   computed: {
-    ...mapStores(useModalsStore, useSitesStore)
+    ...mapStores(useModalsStore, useSitesStore),
+
+    pageContent() {
+      return this.sitesStore.getPageContentObject(this.siteID, this.pageID)
+    }
   },
   mounted() {
     this.pageID = this.sitesStore.getEditingPageID()
     this.siteID = this.sitesStore.getEditingSiteID()
-    for (const blockObject of this.sitesStore.getPageContentObject(this.siteID, this.pageID)) {
-      const div = document.createElement('div')
-      div.innerHTML = blockObject.html
-      div.id = `customBlock-${blockObject.id}`
-      div.setAttribute('data-type', blockObject.type)
-      this.$refs.renderedPageWrapper.append(div)
-    }
   }
 }
 </script>

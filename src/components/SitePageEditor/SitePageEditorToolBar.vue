@@ -28,6 +28,7 @@
 import { mapStores } from 'pinia'
 import { useToolbarStore } from '@/stores/toolbarStore'
 import { useModalsStore } from '@/stores/modalsStore'
+import { useSitesStore } from '@/stores/sitesStore'
 export default {
   data() {
     return {
@@ -72,7 +73,17 @@ export default {
         li.append(div)
 
         li.addEventListener('click', () => {
-          console.log(setItem.html)
+          console.log(setItem)
+          const pageObjectDescr = {
+            type: setItem.type,
+            textContent: setItem.textContent,
+            tag: setItem.tag
+          }
+          this.sitesStore.addPageContentObject(
+            this.sitesStore.getEditingSiteID(),
+            this.sitesStore.getEditingPageID(),
+            pageObjectDescr
+          )
         })
 
         ol.append(li)
@@ -85,7 +96,7 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useToolbarStore, useModalsStore),
+    ...mapStores(useToolbarStore, useModalsStore, useSitesStore),
     shouldRender(setID) {
       return this.currentTab === setID
     }
