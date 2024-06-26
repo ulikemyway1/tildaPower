@@ -2,6 +2,7 @@
   <main class="page-editor__content">
     <div class="rendered-page-wrapper" ref="renderedPageWrapper">
       <component
+        contenteditable="true"
         :id="`custom-${blockObject.id}`"
         v-for="blockObject in pageContent"
         :key="blockObject.id"
@@ -11,8 +12,9 @@
           background: `url(${blockObject.imgSrc}) center center/cover no-repeat`,
           minHeight: blockObject.minHeight
         }"
-        >{{ blockObject.textContent }}</component
-      >
+        @input="textEdit"
+        >{{ blockObject.textContent }}
+      </component>
     </div>
     <button class="button add-block-btn" @click="toggleMenu">Add new block</button>
     <SitePageEditorToolBar />
@@ -44,6 +46,11 @@ export default {
       const div = document.createElement('h2')
       div.textContent = 'Heksksks'
       return div
+    },
+    textEdit(event) {
+      const blockID = Number(event.target.id.split('-')[1])
+      const newText = event.target.textContent
+      this.sitesStore.editBlockText(this.siteID, this.pageID, blockID, newText)
     }
   },
   computed: {

@@ -175,12 +175,7 @@ export const useSitesStore = defineStore('sites', {
         }
       }
     },
-    _findSite(targetID) {
-      return this.sites.find((site) => site.id === targetID)
-    },
-    _findPage(targetSite, pageID) {
-      return targetSite.pages.find((page) => page.id === pageID)
-    },
+
     updateDefaultPageTitle(targetSite) {
       targetSite.pages.forEach((page, index) => {
         if (page.title.includes('New Default Page')) {
@@ -302,6 +297,27 @@ export const useSitesStore = defineStore('sites', {
         }
         targetPage.pageContent.push(newPageContentObject)
       }
+    },
+    editBlockText(siteID, pageID, blockID, newText) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          const targetBlock = this._findBlock(targetPage, blockID)
+          if (targetBlock) {
+            targetBlock.textContent = newText
+          }
+        }
+      }
+    },
+    _findSite(targetID) {
+      return this.sites.find((site) => site.id === targetID)
+    },
+    _findPage(targetSite, pageID) {
+      return targetSite.pages.find((page) => page.id === pageID)
+    },
+    _findBlock(targetPage, blockID) {
+      return targetPage.pageContent.find((block) => block.id === blockID)
     }
   }
 })
