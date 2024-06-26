@@ -110,7 +110,7 @@
 <script>
 import { mapStores } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
-import { useSitesStore } from '@/stores/index'
+import { useSitesStore } from '@/stores/sitesStore'
 import fetchBadges from '@/api/fetchBadges'
 
 export default {

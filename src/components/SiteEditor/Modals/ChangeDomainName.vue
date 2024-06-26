@@ -29,7 +29,7 @@
 <script>
 import { mapStores } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
-import { useSitesStore } from '@/stores/index'
+import { useSitesStore } from '@/stores/sitesStore'
 
 export default {
   props: ['show', 'siteID'],

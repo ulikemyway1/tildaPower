@@ -22,7 +22,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useSitesStore } from '@/stores/index'
+import { useSitesStore } from '@/stores/sitesStore'
 import { useModalsStore } from '@/stores/modalsStore'
 export default {
   props: {

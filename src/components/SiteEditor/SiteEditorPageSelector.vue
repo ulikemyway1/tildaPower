@@ -15,7 +15,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useSitesStore } from '@/stores/index'
+import { useSitesStore } from '@/stores/sitesStore'
 import SiteEditorPageListItem from '@/components/SiteEditor/SiteEditorPageListItem.vue'
 
 export default {

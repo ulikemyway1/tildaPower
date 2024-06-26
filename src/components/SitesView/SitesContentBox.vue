@@ -20,7 +20,7 @@
 import SitesSiteCard from '@/components/SitesView/SitesSiteCard.vue'
 import generateID from '@/helpers/generateID'
 import { mapStores } from 'pinia'
-import { useSitesStore } from '@/stores/index'
+import { useSitesStore } from '@/stores/sitesStore'
 
 export default {
   methods: {
