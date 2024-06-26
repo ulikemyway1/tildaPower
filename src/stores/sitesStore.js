@@ -296,7 +296,9 @@ export const useSitesStore = defineStore('sites', {
           id: index,
           type: pageObjectDescr.type,
           textContent: pageObjectDescr.textContent,
-          tag: pageObjectDescr.tag
+          tag: pageObjectDescr.tag,
+          imgSrc: pageObjectDescr.imgSrc,
+          minHeight: pageObjectDescr.minHeight
         }
         targetPage.pageContent.push(newPageContentObject)
       }

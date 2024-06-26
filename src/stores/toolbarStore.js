@@ -28,8 +28,10 @@ export const useToolbarStore = defineStore('toolbar', {
           type: 'text-block-with-image',
           descr: 'Text block with image is a good choice to make stylish pages!',
           textContent: 'Lorem ipsum...',
-          imgSrc: '',
-          tag: 'div'
+          imgSrc:
+            'https://uploads.dailydot.com/2023/12/crying-cat-meme.jpg?q=65&auto=format&w=1600&ar=2:1&fit=crop',
+          tag: 'div',
+          minHeight: '200px'
         }
       ]
     }

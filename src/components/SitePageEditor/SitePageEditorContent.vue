@@ -6,6 +6,11 @@
         v-for="blockObject in pageContent"
         :key="blockObject.id"
         :is="blockObject.tag"
+        :src="blockObject.imgSrc"
+        :style="{
+          background: `url(${blockObject.imgSrc}) center center/cover no-repeat`,
+          minHeight: blockObject.minHeight
+        }"
         >{{ blockObject.textContent }}</component
       >
     </div>
