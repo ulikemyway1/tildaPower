@@ -31,7 +31,7 @@ import { useModalsStore } from '@/stores/modalsStore'
 export default {
   data() {
     return {
-      currentTabID: ''
+      currentTabID: 'set_1'
     }
   },
   props: {
@@ -87,6 +87,9 @@ export default {
     shouldRender(setID) {
       return this.currentTab === setID
     }
+  },
+  mounted() {
+    this.renderCategoryTools('set_1')
   }
 }
 </script>
