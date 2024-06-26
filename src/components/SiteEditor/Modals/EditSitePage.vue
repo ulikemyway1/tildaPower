@@ -1,5 +1,5 @@
 <template>
-  <div class="modal page-edit" v-if="show">
+  <div class="modal page-edit" v-if="show || this.checkIfCanOpen">
     <div class="modal-overlay" @click="closeModal"></div>
     <div class="modal-content">
       <div class="modal-header">
@@ -179,7 +179,10 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useModalsStore, useSitesStore)
+    ...mapStores(useModalsStore, useSitesStore),
+    checkIfCanOpen() {
+      return this.modalsStore.getModalStatus('editSitePage')
+    }
   },
   async mounted() {
     this.images = await fetchBadges()

@@ -6,12 +6,17 @@ export const useModalsStore = defineStore('modals', {
       domain: false,
       editSitePage: false,
       editSiteID: '',
-      editPageID: ''
+      editPageID: '',
+      toolbar: false
     }
   }),
   actions: {
     toggleModalStatus(modal) {
       this.modals[modal] = !this.modals[modal]
+    },
+
+    hideModal(modal) {
+      this.modals[modal] = false
     },
 
     getModalStatus(modal) {

@@ -1,0 +1,112 @@
+.page-editor__toolbar {
+  display: grid;
+  position: absolute;
+  top: 0;
+  transform: translateX(-120%);
+  visibility: hidden;
+  opacity: 0;
+  grid-template-columns: 1fr 1fr 2fr;
+  min-height: 100dvh;
+  width: 100%;
+  transition: all 0.6s;
+
+  border: 1px solid black;
+
+  &.shown {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .toolbar__menu {
+    padding: 10px;
+    position: relative;
+    background: $gray-bg;
+  }
+
+  .toolbar__header {
+    padding-bottom: 10px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-light;
+  }
+
+  .search-input {
+    flex-grow: 1;
+    padding: 5px 10px;
+  }
+
+  .search-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .close-btn {
+    position: static;
+    cursor: pointer;
+  }
+
+  .toolbar-menu__list {
+    list-style-type: none;
+  }
+  .toolbar-menu__list-item {
+    padding: 5px 10px;
+    text-align: left;
+    border-bottom: 1px solid $border-light;
+    cursor: pointer;
+    transition:
+      background 0.6s,
+      color 0.6s;
+
+    &.active {
+      color: $white-text;
+      background: $tab-active;
+    }
+  }
+
+  .toolbar__content {
+    background: $gray-bg;
+    border-left: 1px solid $border-light;
+  }
+
+  .toolbar__back-drop {
+    background: $semi-black;
+  }
+}
+
+.component-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  font-size: 18px;
+  border-bottom: 1px solid $border-light;
+  cursor: pointer;
+  transition: background 0.6s;
+
+  .component-title {
+    font-weight: 900;
+  }
+
+  .component-descr {
+    font-style: italic;
+    font-size: 16px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .page-editor__toolbar {
+    .close-btn:hover {
+      transform: none;
+    }
+    .toolbar-menu__list-item:hover,
+    .component-description-wrapper:hover {
+      background: $gray-bg-hover;
+    }
+
+    .toolbar-menu__list-item.active:hover {
+      background: $tab-active-hover;
+    }
+  }
+}

@@ -7,9 +7,19 @@
       tabindex="0"
       @click="goToPageEdit"
     ></div>
-    <div class="page__title">
-      <span @click="goToPageEdit" class="clickable">{{ title }}</span>
+    <div class="page__info-wrapper">
+      <div class="page__title">
+        <span @click="goToPageEdit" class="clickable">{{ title }}</span>
+      </div>
+      <div class="page__descr">
+        <span>Page description: </span
+        >{{ this.sitesStore.getPageDescr(this.belongTo, this.pageID) }}
+      </div>
+      <div class="page__url">
+        <span>Page address: </span>{{ this.sitesStore.getPageURL(this.belongTo, this.pageID) }}
+      </div>
     </div>
+
     <div class="button-wrapper">
       <button class="button page-setting-btn" @click="openPageEditor">Settings</button>
       <button class="button danger-btn page-remove-btn" @click="killMe">Delete</button>
@@ -33,7 +43,10 @@ export default {
       this.sitesStore.deleteSitePage(this.belongTo, this.pageID)
     },
     goToPageEdit() {
-      this.$router.push(`/editor/${this.belongTo}/${this.pageID}`)
+      this.$router.push(`/editor/page-editor/${this.pageID}-${this.belongTo}`)
+      this.sitesStore.setEditingPageID(this.pageID)
+      this.sitesStore.setEditingSiteID(this.belongTo)
+      this.modalsStore.hideModal('toolbar')
     },
     openPageEditor() {
       this.modalsStore.toggleModalStatus('editSitePage')

@@ -15,14 +15,16 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page 1',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           },
           {
             id: '1-2',
             title: 'New Default Page 2',
             descr: 'Page descr',
             url: 'page-2',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -36,7 +38,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -50,7 +53,8 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       },
@@ -64,11 +68,15 @@ export const useSitesStore = defineStore('sites', {
             title: 'New Default Page',
             descr: 'Page descr',
             url: 'page-1',
-            badgeURL: ''
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
           }
         ]
       }
-    ]
+    ],
+    editingSiteID: undefined,
+    editingPageID: undefined,
+    mainHeaderDisabled: false
   }),
   actions: {
     getSitesTotal() {
@@ -168,12 +176,7 @@ export const useSitesStore = defineStore('sites', {
         }
       }
     },
-    _findSite(targetID) {
-      return this.sites.find((site) => site.id === targetID)
-    },
-    _findPage(targetSite, pageID) {
-      return targetSite.pages.find((page) => page.id === pageID)
-    },
+
     updateDefaultPageTitle(targetSite) {
       targetSite.pages.forEach((page, index) => {
         if (page.title.includes('New Default Page')) {
@@ -260,6 +263,68 @@ export const useSitesStore = defineStore('sites', {
           targetPage.badgeURL = newBadgeURL
         }
       }
+    },
+    getEditingPageID() {
+      return this.editingPageID
+    },
+    setEditingPageID(pageID) {
+      this.editingPageID = pageID
+    },
+    getEditingSiteID() {
+      return this.editingSiteID
+    },
+    setEditingSiteID(siteID) {
+      this.editingSiteID = siteID
+    },
+    getPageContentObject(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        return targetPage.pageContent
+      }
+    },
+    addPageContentObject(siteID, pageID, pageObjectDescr) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        const index = targetPage.pageContent.length
+        const newPageContentObject = {
+          id: index,
+          type: pageObjectDescr.type,
+          textContent: pageObjectDescr.textContent,
+          tag: pageObjectDescr.tag,
+          imgSrc: pageObjectDescr.imgSrc,
+          minHeight: pageObjectDescr.minHeight
+        }
+        targetPage.pageContent.push(newPageContentObject)
+      }
+    },
+    editBlockText(siteID, pageID, blockID, newText) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          const targetBlock = this._findBlock(targetPage, blockID)
+          if (targetBlock) {
+            targetBlock.textContent = newText
+          }
+        }
+      }
+    },
+    _findSite(targetID) {
+      return this.sites.find((site) => site.id === targetID)
+    },
+    _findPage(targetSite, pageID) {
+      return targetSite.pages.find((page) => page.id === pageID)
+    },
+    _findBlock(targetPage, blockID) {
+      return targetPage.pageContent.find((block) => block.id === blockID)
+    },
+    setMainHeaderDisabled(status) {
+      this.mainHeaderDisabled = status
+    },
+    getMainHeaderStatus() {
+      return this.mainHeaderDisabled
     }
   }
 })

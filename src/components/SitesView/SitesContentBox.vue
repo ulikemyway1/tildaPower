@@ -31,8 +31,12 @@ export default {
         url: `my-project-${this.calcIndex()}.tilda.prod`,
         pages: [
           {
-            pageID: `${this.id}-${generateID()}`,
-            title: 'Page'
+            id: `new-page-1`,
+            title: `New Default Page  1`,
+            descr: 'New Default Page Descr',
+            url: `new-page-1`,
+            badgeURL: '',
+            pageContent: [{ id: 0, type: 'paragraph', html: '<h2>Hello!</h2>' }]
           }
         ]
       }
