@@ -1,22 +1,33 @@
 <template>
   <main class="site-editor">
     <div class="container">
-      <h2>Site Editor</h2>
-      <h3 v-text="`Site editor for  ${$route.params.id}`"></h3>
-      <button
-        class="button site-editor__btn-main"
-        @click="this.$router.push(`/editor/${$route.params.id}/main`)"
-      >
-        Edit Main
-      </button>
+      <SiteEditorToolBar :siteID="id" />
+      <SiteEditorPageSelector :siteID="id" />
+      <ChangeDomainName :show="this.modalsStore.getModalStatus('domain')" :siteID="id" />
+      <EditSitePage :show="this.modalsStore.getModalStatus('editSitePage')" :siteID="id" />
     </div>
   </main>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useModalsStore } from '@/stores/modalsStore'
+import SiteEditorToolBar from '@/components/SiteEditor/SiteEditorToolBar.vue'
+import SiteEditorPageSelector from '@/components/SiteEditor/SiteEditorPageSelector.vue'
+import ChangeDomainName from '@/components/SiteEditor/Modals/ChangeDomainName.vue'
+import EditSitePage from '@/components/SiteEditor/Modals/EditSitePage.vue'
 export default {
   props: {
     id: String
+  },
+  components: {
+    SiteEditorToolBar,
+    SiteEditorPageSelector,
+    ChangeDomainName,
+    EditSitePage
+  },
+  computed: {
+    ...mapStores(useModalsStore)
   }
 }
 </script>

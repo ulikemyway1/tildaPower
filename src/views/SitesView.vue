@@ -3,7 +3,9 @@
     <div class="container">
       <h2 class="sites__title">Explore your created sites.</h2>
       <SitesToolbar @createNewSiteEvent="handleCreateNewSiteEvent" />
-      <SitesContentBox ref="sitesViewContentBox" />
+      <KeepAlive>
+        <SitesContentBox ref="sitesViewContentBox" />
+      </KeepAlive>
     </div>
   </main>
 </template>
@@ -19,7 +21,6 @@ export default {
   },
   methods: {
     handleCreateNewSiteEvent() {
-      console.log('parent hello')
       this.$refs.sitesViewContentBox.createNewSite()
     }
   }
