@@ -19,6 +19,7 @@
     <button class="button add-block-btn" @click="toggleMenu">Add new block</button>
     <SitePageEditorToolBar />
   </main>
+  <EditSitePage />
 </template>
 
 <script>
@@ -26,6 +27,7 @@ import { mapStores } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
 import { useSitesStore } from '@/stores/sitesStore'
 import SitePageEditorToolBar from '@/components/SitePageEditor/SitePageEditorToolBar.vue'
+import EditSitePage from '@/components/SiteEditor/Modals/EditSitePage.vue'
 export default {
   data() {
     return {
@@ -36,7 +38,8 @@ export default {
     }
   },
   components: {
-    SitePageEditorToolBar
+    SitePageEditorToolBar,
+    EditSitePage
   },
   methods: {
     toggleMenu() {

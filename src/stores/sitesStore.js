@@ -75,7 +75,8 @@ export const useSitesStore = defineStore('sites', {
       }
     ],
     editingSiteID: undefined,
-    editingPageID: undefined
+    editingPageID: undefined,
+    mainHeaderDisabled: false
   }),
   actions: {
     getSitesTotal() {
@@ -318,6 +319,12 @@ export const useSitesStore = defineStore('sites', {
     },
     _findBlock(targetPage, blockID) {
       return targetPage.pageContent.find((block) => block.id === blockID)
+    },
+    setMainHeaderDisabled(status) {
+      this.mainHeaderDisabled = status
+    },
+    getMainHeaderStatus() {
+      return this.mainHeaderDisabled
     }
   }
 })

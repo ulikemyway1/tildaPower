@@ -73,7 +73,6 @@ export default {
         li.append(div)
 
         li.addEventListener('click', () => {
-          console.log(setItem)
           const pageObjectDescr = {
             type: setItem.type,
             textContent: setItem.textContent,

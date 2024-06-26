@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header v-if="!disabledNow" class="header">
     <div class="header__logo">
       <RouterLink class="link" to="/">
         <svg
@@ -58,7 +58,8 @@
 <script>
 export default {
   props: {
-    username: String
+    username: String,
+    disabledNow: Boolean
   }
 }
 </script>

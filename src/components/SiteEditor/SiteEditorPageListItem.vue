@@ -43,7 +43,7 @@ export default {
       this.sitesStore.deleteSitePage(this.belongTo, this.pageID)
     },
     goToPageEdit() {
-      this.$router.push(`/editor/${this.belongTo}/${this.pageID}`)
+      this.$router.push(`/editor/page-editor/${this.pageID}-${this.belongTo}`)
       this.sitesStore.setEditingPageID(this.pageID)
       this.sitesStore.setEditingSiteID(this.belongTo)
       this.modalsStore.hideModal('toolbar')

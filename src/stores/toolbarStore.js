@@ -27,7 +27,7 @@ export const useToolbarStore = defineStore('toolbar', {
           title: 'Text block with image',
           type: 'text-block-with-image',
           descr: 'Text block with image is a good choice to make stylish pages!',
-          textContent: 'Lorem ipsum...',
+          textContent: 'Lorem ipsum dolor...',
           imgSrc:
             'https://uploads.dailydot.com/2023/12/crying-cat-meme.jpg?q=65&auto=format&w=1600&ar=2:1&fit=crop',
           tag: 'div',
