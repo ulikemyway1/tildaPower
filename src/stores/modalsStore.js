@@ -6,7 +6,8 @@ export const useModalsStore = defineStore('modals', {
       domain: false,
       editSitePage: false,
       editSiteID: '',
-      editPageID: ''
+      editPageID: '',
+      toolbar: false
     }
   }),
   actions: {

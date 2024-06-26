@@ -1,10 +1,10 @@
 <template>
-  <main class="page-editor__toolbar">
+  <main class="page-editor__toolbar" :class="{ shown: this.modalsStore.getModalStatus('toolbar') }">
     <div class="toolbar__menu">
       <header class="toolbar__header">
         <input type="search" class="search-input" placeholder="Components Library" />
         <button class="search-btn">Search</button>
-        <button class="close-btn">X</button>
+        <button class="close-btn" @click="closeModal">X</button>
       </header>
       <ul class="toolbar-menu__list">
         <li
@@ -20,18 +20,22 @@
       </ul>
     </div>
     <div class="toolbar__content" ref="toolbarContent"></div>
+    <div class="toolbar__back-drop"></div>
   </main>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useToolbarStore } from '@/stores/toolbarStore'
-
+import { useModalsStore } from '@/stores/modalsStore'
 export default {
   data() {
     return {
-      currentTabID: 's'
+      currentTabID: ''
     }
+  },
+  props: {
+    shown: Boolean
   },
   methods: {
     toggleCategory(event) {
@@ -73,18 +77,15 @@ export default {
       }
 
       toolbarContent.append(ol)
+    },
+    closeModal() {
+      this.modalsStore.toggleModalStatus('toolbar')
     }
   },
   computed: {
-    ...mapStores(useToolbarStore),
+    ...mapStores(useToolbarStore, useModalsStore),
     shouldRender(setID) {
       return this.currentTab === setID
-    }
-  },
-  mounted() {
-    const toolbarContent = this.$refs.toolbarContent
-    if (toolbarContent instanceof HTMLElement) {
-      const toolbarCaregories = toolbarContent.querySelectorAll('.toolbar-category-wrapper')
     }
   }
 }

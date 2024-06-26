@@ -1,9 +1,22 @@
 .page-editor__toolbar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: absolute;
+  top: 0;
+  transform: translateX(-120%);
+  visibility: hidden;
+  opacity: 0;
+  grid-template-columns: 1fr 1fr 2fr;
   min-height: 100dvh;
+  width: 100%;
+  transition: all 0.6s;
 
   border: 1px solid black;
+
+  &.shown {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
 
   .toolbar__menu {
     padding: 10px;
@@ -50,6 +63,15 @@
       color: $white-text;
       background: $tab-active;
     }
+  }
+
+  .toolbar__content {
+    background: $gray-bg;
+    border-left: 1px solid $border-light;
+  }
+
+  .toolbar__back-drop {
+    background: $semi-black;
   }
 }
 
