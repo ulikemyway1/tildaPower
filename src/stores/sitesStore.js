@@ -16,7 +16,9 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: ['<h1>Hello</h1>']
+            pageContent: {
+              id1: ['<h2>Hello</h2>']
+            }
           },
           {
             id: '1-2',
