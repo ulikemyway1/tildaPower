@@ -50,16 +50,23 @@
 
         <span class="user__name">{{ username || 'Anon' }}</span>
       </div>
-      <button class="button logout-btn" title="Log Out">Log Out</button>
+      <button class="button logout-btn" title="Log Out" @click="handleLogOut">Log Out</button>
     </div>
   </header>
 </template>
 
 <script>
+import deleteAuthCookie from '@/helpers/deleteAuthCookie'
 export default {
   props: {
     username: String,
     disabledNow: Boolean
+  },
+  methods: {
+    handleLogOut() {
+      deleteAuthCookie()
+      this.$router.push('/login')
+    }
   }
 }
 </script>
