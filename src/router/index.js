@@ -3,6 +3,7 @@ import ProfileView from '../views/ProfileView.vue'
 import SitesView from '../views/SitesView.vue'
 import SiteEditor from '../views/SiteEditorView.vue'
 import PageEditor from '../views/PageEditorView.vue'
+import PagePreview from '../views/PagePreviewView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,12 @@ const router = createRouter({
       path: '/editor/:id/:pageId',
       name: 'pageEditor',
       component: PageEditor,
+      props: true
+    },
+    {
+      path: '/page-preview/:pageId',
+      name: 'pagePreview',
+      component: PagePreview,
       props: true
     }
   ]
