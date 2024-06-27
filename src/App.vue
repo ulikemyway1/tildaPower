@@ -22,6 +22,9 @@ export default {
       } else {
         this.sitesStore.setMainHeaderDisabled(false)
       }
+      // if (from.href.includes('/page-editor/')) {
+      //   's'
+      // }
     }
   }
 }

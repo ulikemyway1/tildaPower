@@ -56,7 +56,7 @@ export default {
     },
     goToPagePreview() {
       this.$router.push(
-        `/page-preview/${this.sitesStore.getEditingPageID()}-${this.sitesStore.getEditingSiteID()}`
+        `/page-preview/project-#${this.sitesStore.getEditingSiteID()}#-page-#${this.sitesStore.getEditingPageID()}#`
       )
     }
   },
