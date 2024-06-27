@@ -22,6 +22,12 @@ export default {
       } else {
         this.sitesStore.setMainHeaderDisabled(false)
       }
+      if (to.href.includes('/page-preview/')) {
+        const actualSite = to.href.split('#')[1]
+        const actualPage = to.href.split('#')[3]
+        this.sitesStore.setEditingSiteID(actualSite)
+        this.sitesStore.setEditingPageID(actualPage)
+      }
     }
   }
 }

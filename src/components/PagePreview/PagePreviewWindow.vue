@@ -10,7 +10,6 @@
         background: `url(${blockObject.imgSrc}) center center/cover no-repeat`,
         minHeight: blockObject.minHeight
       }"
-      @input="textEdit"
       >{{ blockObject.textContent }}
     </component>
   </div>
