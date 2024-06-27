@@ -10,6 +10,10 @@ export const useToolbarStore = defineStore('toolbar', {
       covers: {
         title: 'Covers',
         componentsID: 'set_2'
+      },
+      sliders: {
+        title: 'Sliders',
+        componentsID: 'set_3'
       }
     },
     components: {
@@ -32,6 +36,13 @@ export const useToolbarStore = defineStore('toolbar', {
             'https://uploads.dailydot.com/2023/12/crying-cat-meme.jpg?q=65&auto=format&w=1600&ar=2:1&fit=crop',
           tag: 'div',
           minHeight: '200px'
+        }
+      ],
+      set_3: [
+        {
+          title: 'Image slider',
+          type: 'slider',
+          descr: 'Impress with slider!'
         }
       ]
     }

@@ -68,6 +68,10 @@
   .toolbar__content {
     background: $gray-bg;
     border-left: 1px solid $border-light;
+
+    ul {
+      list-style-type: none;
+    }
   }
 
   .toolbar__back-drop {

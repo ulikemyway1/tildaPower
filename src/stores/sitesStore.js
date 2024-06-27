@@ -287,14 +287,14 @@ export const useSitesStore = defineStore('sites', {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
         const targetPage = this._findPage(targetSite, pageID)
-        const index = targetPage.pageContent.length
+        const index = targetPage?.pageContent?.length
         const newPageContentObject = {
           id: index,
           type: pageObjectDescr.type,
-          textContent: pageObjectDescr.textContent,
+          textContent: pageObjectDescr?.textContent,
           tag: pageObjectDescr.tag,
-          imgSrc: pageObjectDescr.imgSrc,
-          minHeight: pageObjectDescr.minHeight
+          imgSrc: pageObjectDescr?.imgSrc,
+          minHeight: pageObjectDescr?.minHeight
         }
         targetPage.pageContent.push(newPageContentObject)
       }
