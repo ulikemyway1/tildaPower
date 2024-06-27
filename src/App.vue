@@ -17,7 +17,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.href.includes('/page-editor/')) {
+      if (to.href.includes('/page-editor/') || to.href.includes('/page-preview/')) {
         this.sitesStore.setMainHeaderDisabled(true)
       } else {
         this.sitesStore.setMainHeaderDisabled(false)
