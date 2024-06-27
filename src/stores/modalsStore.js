@@ -37,6 +37,7 @@ export const useModalsStore = defineStore('modals', {
     },
     getEditPageID() {
       return this.editPageID
-    }
+    },
+    persist: true
   }
 })

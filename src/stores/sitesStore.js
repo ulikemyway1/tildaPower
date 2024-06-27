@@ -326,5 +326,6 @@ export const useSitesStore = defineStore('sites', {
     getMainHeaderStatus() {
       return this.mainHeaderDisabled
     }
-  }
+  },
+  persist: true
 })
