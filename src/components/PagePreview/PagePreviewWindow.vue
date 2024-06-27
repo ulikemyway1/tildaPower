@@ -4,7 +4,6 @@
       <SliderComponent v-if="blockObject.type === 'slider'" :slides-per-view="'1'" />
       <component
         v-else
-        contenteditable="true"
         :id="`custom-${blockObject.id}`"
         :key="blockObject.id"
         :is="blockObject.tag"
