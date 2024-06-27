@@ -1,0 +1,14 @@
+.go-back {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  opacity: 0.5;
+  color: #000000;
+  transition: all 0.5s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .go-back:hover {
+    opacity: 1;
+  }
+}

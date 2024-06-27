@@ -1,10 +1,10 @@
 @import url(base/reset.scss);
 @import url(base/fonts.scss);
 @import url(base/app.scss);
-@import url(pages/_mainPage.scss);
-@import url(components/AppComponents/_headerApp.scss);
+@import url(pages/mainPage.scss);
+@import url(components/AppComponents/headerApp.scss);
 @import url(components/SitesView/sitesIndex.scss);
-@import url(components//shared/buttons.scss);
+@import url(components/Shared/buttons.scss);
 @import url(components/SiteEditor/siteEditor.scss);
 @import url(components/SitePageEditor/sitePageEditor.scss);
 @import url(components/SiteEditor/siteEditorToolBar.scss);
@@ -14,3 +14,6 @@
 @import url(components/SitePageEditor/sitePageEditorContent.scss);
 @import url(components/SitePageEditor/sitePageEditorToolbar.scss);
 @import url(components/SitePageEditor/sitePageEditorHeader.scss);
+@import url(components/PagePreview/pagePreview.scss);
+@import url(pages/loginPage.scss);
+@import url(components/Login/loginForm.scss);

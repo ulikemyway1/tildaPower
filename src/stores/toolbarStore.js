@@ -54,6 +54,7 @@ export const useToolbarStore = defineStore('toolbar', {
     getComponentsSetItems(setID) {
       const targetSet = this.components[setID]
       return targetSet
-    }
+    },
+    persist: true
   }
 })

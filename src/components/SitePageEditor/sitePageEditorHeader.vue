@@ -23,7 +23,7 @@
         </svg>
       </RouterLink>
     </div>
-
+    <a href="#" class="dropdown__link" @click.prevent="goToPagePreview">Preview</a>
     <div class="last-content-wrapper">
       <div class="dropdown" :class="{ open: this.dropDownOpen }">
         <span class="dropdown__link" @click="openSiteSettingModal">Site Settings</span>
@@ -38,6 +38,7 @@
 <script>
 import { mapStores } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
+import { useSitesStore } from '@/stores/sitesStore'
 
 export default {
   data() {
@@ -52,10 +53,15 @@ export default {
     openSiteSettingModal() {
       this.toggleDropDown()
       this.modalsStore.toggleModalStatus('editSitePage')
+    },
+    goToPagePreview() {
+      this.$router.push(
+        `/page-preview/${this.sitesStore.getEditingPageID()}-${this.sitesStore.getEditingSiteID()}`
+      )
     }
   },
   computed: {
-    ...mapStores(useModalsStore)
+    ...mapStores(useModalsStore, useSitesStore)
   }
 }
 </script>
