@@ -22,7 +22,7 @@
         type="password"
         class="input password-input"
         autocomplete="current-password"
-        @input="handleInput"
+        @input="handlePasswordInput"
       />
     </label>
     <div v-if="!emailIsValid && loginAttempt" class="validation-error">
@@ -34,30 +34,55 @@
 </template>
 
 <script>
+import CryptoJS, { AES } from 'crypto-js'
 import setAuthCookie from '@/helpers/setAuthCookie'
+import { mapStores } from 'pinia'
+import { useAppStore } from '@/stores/appStore'
 export default {
   data() {
     return {
       email: '',
       password: '',
-      emailIsValid: false,
-      passwordIsValid: false,
       loginAttempt: false
     }
   },
   methods: {
-    handleLogin() {},
+    handleSuccessLogin() {
+      const token = AES.encrypt(new Date().getTime().toString(), 'happy-happy-happy').toString()
+      setAuthCookie(token)
+      this.redirectToSites()
+    },
+
     handleLoginAttempt() {
-      setAuthCookie('test')
       this.loginAttempt = true
-      if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.email)) {
-        this.emailIsValid = true
-        console.log('email ok')
+      if (this.emailIsValid && this.passwordIsValid) {
+        this.handleSuccessLogin()
       }
     },
     handleEmailInput(event) {
       this.loginAttempt = false
       this.email = event.target.value
+    },
+    handlePasswordInput(event) {
+      this.loginAttempt = false
+      this.password = event.target.value
+    },
+    checkPassword(password) {
+      const hashedPassword = this.appStore.gethashedPassword
+      const hashFromUserPassword = CryptoJS.SHA256(password).toString()
+      return hashedPassword === hashFromUserPassword
+    },
+    redirectToSites() {
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    ...mapStores(useAppStore),
+    emailIsValid() {
+      return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.email)
+    },
+    passwordIsValid() {
+      return this.checkPassword(this.password)
     }
   }
 }

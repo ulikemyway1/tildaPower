@@ -3,7 +3,6 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import getAuthTokenFromCookie from '@/helpers/getAuthTokenFromCookie'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
 
