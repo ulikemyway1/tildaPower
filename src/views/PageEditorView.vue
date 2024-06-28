@@ -10,7 +10,7 @@
 
 <script>
 import SitePageEditorContent from '@/components/SitePageEditor/SitePageEditorContent.vue'
-import SitePageEditorHeader from '@/components/SitePageEditor/sitePageEditorHeader.vue'
+import SitePageEditorHeader from '@/components/SitePageEditor/SitePageEditorHeader.vue'
 
 export default {
   props: {
