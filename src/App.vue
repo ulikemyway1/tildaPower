@@ -1,5 +1,5 @@
 <template>
-  <HeaderApp username="Alexander" :disabledNow="this.sitesStore.getMainHeaderStatus()" />
+  <HeaderApp username="Alexander" :disabledNow="mainHeaderStatus" />
   <RouterView />
 </template>
 
@@ -13,7 +13,10 @@ export default {
     HeaderApp
   },
   computed: {
-    ...mapStores(useSitesStore)
+    ...mapStores(useSitesStore),
+    mainHeaderStatus() {
+      return this.sitesStore.getMainHeaderStatus()
+    }
   },
   watch: {
     $route(to, from) {
