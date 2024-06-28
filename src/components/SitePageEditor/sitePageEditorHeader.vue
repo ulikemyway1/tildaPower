@@ -25,6 +25,7 @@
     </div>
     <a href="#" class="dropdown__link" @click.prevent="goToPagePreview">Preview</a>
     <div class="last-content-wrapper">
+      <button class="more-btn" @click="undoAction">Undo</button>
       <div class="dropdown" :class="{ open: this.dropDownOpen }">
         <span class="dropdown__link" @click="openSiteSettingModal">Site Settings</span>
         <RouterLink to="/" class="dropdown__link">My Sites</RouterLink>
@@ -36,17 +37,24 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
+import { mapStores, mapActions } from 'pinia'
 import { useModalsStore } from '@/stores/modalsStore'
 import { useSitesStore } from '@/stores/sitesStore'
 
 export default {
   data() {
     return {
-      dropDownOpen: false
+      dropDownOpen: false,
+      pageID: '',
+      siteID: ''
     }
   },
   methods: {
+    ...mapActions(useSitesStore, ['undoUserAction']),
+
+    undoAction() {
+      this.undoUserAction(this.siteID, this.pageID)
+    },
     toggleDropDown() {
       this.dropDownOpen = !this.dropDownOpen
     },
@@ -62,6 +70,10 @@ export default {
   },
   computed: {
     ...mapStores(useModalsStore, useSitesStore)
+  },
+  mounted() {
+    this.pageID = this.sitesStore.getEditingPageID()
+    this.siteID = this.sitesStore.getEditingSiteID()
   }
 }
 </script>

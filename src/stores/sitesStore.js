@@ -3,6 +3,7 @@ import generateID from '@/helpers/generateID'
 
 export const useSitesStore = defineStore('sites', {
   state: () => ({
+    emitsCounter: 0,
     sites: [
       {
         id: '1',
@@ -15,7 +16,8 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }],
+            pageContentHistory: [[{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]]
           },
           {
             id: '1-2',
@@ -23,7 +25,8 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-2',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }],
+            pageContentHistory: [[{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]]
           }
         ]
       },
@@ -38,7 +41,8 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }],
+            pageContentHistory: [[{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]]
           }
         ]
       },
@@ -53,7 +57,8 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }],
+            pageContentHistory: [[{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]]
           }
         ]
       },
@@ -68,7 +73,8 @@ export const useSitesStore = defineStore('sites', {
             descr: 'Page descr',
             url: 'page-1',
             badgeURL: '',
-            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]
+            pageContent: [{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }],
+            pageContentHistory: [[{ id: 0, type: 'paragraph', tag: 'h2', textContent: 'Hello!' }]]
           }
         ]
       }
@@ -282,6 +288,48 @@ export const useSitesStore = defineStore('sites', {
         return targetPage.pageContent
       }
     },
+    addPageContentToHistory(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        let newPageContent = targetPage.pageContent
+        console.log(newPageContent)
+        console.log(targetPage.pageContentHistory)
+        targetPage.pageContentHistory.push(newPageContent)
+
+        if (targetPage.pageContentHistory.length) {
+          if (
+            JSON.stringify(newPageContent) !== JSON.stringify(targetPage.pageContentHistory.at(-1))
+          ) {
+            targetPage.pageContentHistory.push(newPageContent)
+          }
+        } else {
+          targetPage.pageContentHistory.push(newPageContent)
+        }
+
+        console.log(targetPage.pageContentHistory)
+      }
+    },
+    increaseEmitsCounter() {
+      this.emitsCounter += 1
+    },
+
+    undoUserAction(siteID, pageID) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          if (targetPage.pageContentHistory.length) {
+            console.log(targetPage.pageContentHistory)
+            targetPage.pageContentHistory = targetPage.pageContentHistory.slice(0, -1)
+            targetPage.pageContent = targetPage.pageContentHistory.at(-2)
+            console.log(targetPage.pageContent)
+            console.log(targetPage.pageContentHistory)
+            this.increaseEmitsCounter()
+          }
+        }
+      }
+    },
     addPageContentObject(siteID, pageID, pageObjectDescr) {
       const targetSite = this._findSite(siteID)
       if (targetSite) {
@@ -295,10 +343,45 @@ export const useSitesStore = defineStore('sites', {
           imgSrc: pageObjectDescr?.imgSrc,
           minHeight: pageObjectDescr?.minHeight
         }
-        targetPage.pageContent.push(newPageContentObject)
+        if (targetPage.pageContent) targetPage.pageContent.push(newPageContentObject)
+        else targetPage.pageContent = [newPageContentObject]
+
+        this.addPageContentToHistory(siteID, pageID)
+      }
+    },
+    manipulateWithBlocks(siteID, pageID, contentIndex, action) {
+      let page = this.getPageContentObject(siteID, pageID)
+      let contentItem = { ...page[contentIndex] }
+      if (contentItem) {
+        switch (action.type) {
+          case 'remove':
+            page.splice(contentIndex, 1)
+            break
+          case 'up':
+            if (contentIndex - 1 >= 0) {
+              page.splice(contentIndex, 1)
+              page.splice(contentIndex - 1, 0, contentItem)
+            }
+            break
+
+          case 'down':
+            page.splice(contentIndex, 1)
+            page.splice(contentIndex + 1, 0, contentItem)
+
+            break
+
+          case 'copy':
+            page.push(contentItem)
+            break
+
+          default:
+            break
+        }
+        this.addPageContentToHistory(siteID, pageID)
       }
     },
     editBlockText(siteID, pageID, blockID, newText) {
+      console.log('edit-text')
       const targetSite = this._findSite(siteID)
       if (targetSite) {
         const targetPage = this._findPage(targetSite, pageID)
@@ -309,6 +392,35 @@ export const useSitesStore = defineStore('sites', {
           }
         }
       }
+      this.addPageContentToHistory(siteID, pageID)
+    },
+    editBlockImg(siteID, pageID, blockID, newImg, newTextContent) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          const targetBlock = this._findBlock(targetPage, blockID)
+          if (targetBlock) {
+            if (newImg) targetBlock.imgSrc = newImg
+            targetBlock.textContent = newTextContent
+          }
+        }
+      }
+      this.addPageContentToHistory(siteID, pageID)
+    },
+
+    editSlider(siteID, pageID, blockID, newImgArr) {
+      const targetSite = this._findSite(siteID)
+      if (targetSite) {
+        const targetPage = this._findPage(targetSite, pageID)
+        if (targetPage) {
+          const targetBlock = this._findBlock(targetPage, blockID)
+          if (targetBlock) {
+            targetBlock.imageArr = newImgArr
+          }
+        }
+      }
+      this.addPageContentToHistory(siteID, pageID)
     },
     _findSite(targetID) {
       return this.sites.find((site) => site.id === targetID)

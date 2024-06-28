@@ -1,24 +1,39 @@
 <template>
-  <swiper-container :slides-per-view="slidesPerView" pagination="true">
-    <swiper-slide>
-      <div :style="`background-image:url(${img_1_URL})`"></div>
-    </swiper-slide>
-    <swiper-slide>
-      <div :style="`background-image:url(${img_2_URL})`"></div>
-    </swiper-slide>
-    <swiper-slide>
-      <div :style="`background-image:url(${img_3_URL})`"></div>
-    </swiper-slide>
-  </swiper-container>
+  <div class="edit-block">
+    <BlockWrapper :index />
+    <swiper-container :slides-per-view="slidesPerView" pagination="true">
+      <swiper-slide v-for="(img, index) in imageArr" :key="index">
+        <div :style="`background-image:url(${img})`"></div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
 </template>
 
 <script>
 import { register } from 'swiper/element/bundle'
+import BlockWrapper from './BlockWrapper.vue'
 
 register()
 
 export default {
+  components: {
+    BlockWrapper
+  },
   props: {
+    index: {
+      type: Number,
+      required: true
+    },
+    imageArr: {
+      type: Array,
+      default: () => {
+        return [
+          '/src/assets/images/cat.jpg',
+          '/src/assets/images/cat2.jpg',
+          '/src/assets/images/cat3.jpg'
+        ]
+      }
+    },
     img_1_URL: {
       type: String,
       default:

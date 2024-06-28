@@ -7,7 +7,9 @@ export const useModalsStore = defineStore('modals', {
       editSitePage: false,
       editSiteID: '',
       editPageID: '',
-      toolbar: false
+      toolbar: false,
+      contentToolbar: false,
+      contentToolbarID: 0
     }
   }),
   actions: {
@@ -37,6 +39,9 @@ export const useModalsStore = defineStore('modals', {
     },
     getEditPageID() {
       return this.editPageID
+    },
+    setContentToolbarID(id) {
+      this.contentToolbarID = id
     },
     persist: true
   }
