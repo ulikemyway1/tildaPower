@@ -6,38 +6,78 @@
         <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
         <h2>Change site page</h2>
         <div class="modal-toggle">
-          <span class="modal-toggle__item" :class="this.openMain ? 'active' : ''" tabindex="0"
-            @click="openMainTab">Main</span>
-          <span class="modal-toggle__item" :class="this.openBadge ? 'active' : ''" tabindex="0"
-            @click="openBadgeTab">Badge</span>
+          <span
+            class="modal-toggle__item"
+            :class="this.openMain ? 'active' : ''"
+            tabindex="0"
+            @click="openMainTab"
+            >Main</span
+          >
+          <span
+            class="modal-toggle__item"
+            :class="this.openBadge ? 'active' : ''"
+            tabindex="0"
+            @click="openBadgeTab"
+            >Badge</span
+          >
         </div>
       </div>
       <div class="modal-body">
         <!-- Not working KeepAlive :C -->
         <KeepAlive>
           <form :is="openMain" v-if="openMain" class="modal-form-edit-main">
-            <label for="title" class="label">Page Title
-              <input ref="title" type="text" name="title" id="title" class="input" :value="this.sitesStore.getPageTitle(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
+            <label for="title" class="label"
+              >Page Title
+              <input
+                ref="title"
+                type="text"
+                name="title"
+                id="title"
+                class="input"
+                :value="
+                  this.sitesStore.getPageTitle(
+                    this.modalsStore.getEditSiteID(),
+                    this.modalsStore.getEditPageID()
+                  )
+                "
+                @input="checkValidation"
+              />
             </label>
 
-            <label for="descr" class="label">Page Description
-              <input ref="descr" type="text" name="descr" id="descr" class="input" :value="this.sitesStore.getPageDescr(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
+            <label for="descr" class="label"
+              >Page Description
+              <input
+                ref="descr"
+                type="text"
+                name="descr"
+                id="descr"
+                class="input"
+                :value="
+                  this.sitesStore.getPageDescr(
+                    this.modalsStore.getEditSiteID(),
+                    this.modalsStore.getEditPageID()
+                  )
+                "
+                @input="checkValidation"
+              />
             </label>
 
-            <label for="url" class="label">Page URL
-              <input ref="url" type="text" name="url" id="url" class="input" :value="this.sitesStore.getPageURL(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
+            <label for="url" class="label"
+              >Page URL
+              <input
+                ref="url"
+                type="text"
+                name="url"
+                id="url"
+                class="input"
+                :value="
+                  this.sitesStore.getPageURL(
+                    this.modalsStore.getEditSiteID(),
+                    this.modalsStore.getEditPageID()
+                  )
+                "
+                @input="checkValidation"
+              />
             </label>
 
             <button @click.prevent="saveChanges" class="button save-changes">Save changes</button>
@@ -49,8 +89,14 @@
         <KeepAlive>
           <form :is="openBadge" v-if="openBadge" class="modal-form-edit-main">
             <div class="badges-wrapper">
-              <img v-for="img in this.images" :key="img" :src="img" alt="Image Badge" class="image-badge"
-                @click="setBadgeURL" />
+              <img
+                v-for="img in this.images"
+                :key="img"
+                :src="img"
+                alt="Image Badge"
+                class="image-badge"
+                @click="setBadgeURL"
+              />
             </div>
 
             <button @click.prevent="saveNewBadge" class="button save-changes">Save changes</button>
