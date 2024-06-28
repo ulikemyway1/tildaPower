@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     handleSuccessLogin() {
-      const token = AES.encrypt(new Date().getTime().toString(), 'happy-happy-happy').toString()
+      const token = AES.encrypt(this.currentDate, 'happy-happy-happy').toString()
       setAuthCookie(token)
       this.redirectToSites()
     },
@@ -83,6 +83,9 @@ export default {
     },
     passwordIsValid() {
       return this.checkPassword(this.password)
+    },
+    currentDate() {
+      return new Date().getTime().toString()
     }
   }
 }
