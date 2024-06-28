@@ -3,7 +3,7 @@
     <div class="modal-overlay" @click="closeModal"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
+        <button class="close-modal" aria-label="Close modal" @click="closeModal">X</button>
       </div>
       <div class="modal-body">
         <h2>Add domain name</h2>

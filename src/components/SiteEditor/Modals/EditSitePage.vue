@@ -3,7 +3,7 @@
     <div class="modal-overlay" @click="closeModal"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
+        <button class="close-modal" aria-label="Close modal" @click="closeModal">X</button>
         <h2>Change site page</h2>
         <div class="modal-toggle">
           <span
@@ -63,7 +63,7 @@
             />
           </label>
 
-          <button @click.prevent="saveChanges" class="button save-changes">Save changes</button>
+          <button class="button save-changes" @click.prevent="saveChanges">Save changes</button>
           <Transition>
             <span v-if="notValid" class="validation-error">Please, fill all fields</span>
           </Transition>

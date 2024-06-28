@@ -1,8 +1,8 @@
 <template>
   <main>
-    <ul v-if="this.sitesStore.getSitePages(this.siteID).length !== 0" class="page-list">
+    <ul v-if="sitePabesListLength !== 0" class="page-list">
       <SiteEditorPageListItem
-        v-for="page in this.sitesStore.getSitePages(this.siteID)"
+        v-for="page in sitePages"
         :key="page.id"
         :title="page.title"
         :pageID="page.id"
@@ -26,7 +26,13 @@ export default {
     SiteEditorPageListItem
   },
   computed: {
-    ...mapStores(useSitesStore)
+    ...mapStores(useSitesStore),
+    sitePabesListLength() {
+      return this.sitesStore.getSitePages(this.siteID)?.length || 0
+    },
+    sitePages() {
+      return this.sitesStore.getSitePages(this.siteID)
+    }
   }
 }
 </script>

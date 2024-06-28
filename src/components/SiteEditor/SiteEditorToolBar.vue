@@ -3,16 +3,13 @@
     <a href="#" class="link add-domain" @click="openDomainModal">Link a domain</a>
     <div class="site-url">
       <span
-        >Site address:
-        <a :href="this.sitesStore.getSiteURL(this.siteID)" class="link site-url__link">{{
-          this.sitesStore.getSiteURL(this.siteID)
-        }}</a></span
+        >Site address: <a :href="siteURL" class="link site-url__link">{{ siteURL }}</a></span
       >
       <span></span>
     </div>
     <div class="site-title">
       <span>Project Title:</span>
-      {{ this.sitesStore.getSiteTitle(this.siteID) }}
+      {{ siteTitle }}
     </div>
     <button class="button create-new-page-btn" @click="createNewPage(this.siteID)">
       Create a new page
@@ -27,9 +24,6 @@ import { useModalsStore } from '@/stores/modalsStore'
 export default {
   props: {
     siteID: String
-  },
-  computed: {
-    ...mapStores(useSitesStore, useModalsStore)
   },
   methods: {
     createNewPage(id) {
@@ -46,6 +40,15 @@ export default {
     },
     openDomainModal() {
       this.modalsStore.toggleModalStatus('domain')
+    }
+  },
+  computed: {
+    ...mapStores(useSitesStore, useModalsStore),
+    siteURL() {
+      return this.sitesStore.getSiteURL(this.siteID)
+    },
+    siteTitle() {
+      return this.sitesStore.getSiteTitle(this.siteID)
     }
   }
 }
