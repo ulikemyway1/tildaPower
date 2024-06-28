@@ -22,11 +22,6 @@ import { mapStores } from 'pinia'
 import { useSitesStore } from '@/stores/sitesStore'
 import SliderComponent from '@/components/SitePageEditor/Components/SliderComponent.vue'
 export default {
-  data() {
-    return {
-      pageContentUpdateObserver: this.pageContent
-    }
-  },
   computed: {
     ...mapStores(useSitesStore),
 
