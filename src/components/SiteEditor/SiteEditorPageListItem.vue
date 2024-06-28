@@ -2,22 +2,17 @@
   <li class="page-list__item">
     <div
       class="page__badge clickable"
-      :style="`background-image:url(${this.sitesStore.getPageBadge(this.belongTo, this.pageID)})`"
-      :class="this.sitesStore.getPageBadge(this.belongTo, this.pageID) ? '' : 'bg-1'"
+      :style="`background-image:url(${pageBadgeURL})`"
+      :class="pageBadgeClass"
       tabindex="0"
       @click="goToPageEdit"
     ></div>
     <div class="page__info-wrapper">
       <div class="page__title">
-        <span @click="goToPageEdit" class="clickable">{{ title }}</span>
+        <span class="clickable" @click="goToPageEdit">{{ title }}</span>
       </div>
-      <div class="page__descr">
-        <span>Page description: </span
-        >{{ this.sitesStore.getPageDescr(this.belongTo, this.pageID) }}
-      </div>
-      <div class="page__url">
-        <span>Page address: </span>{{ this.sitesStore.getPageURL(this.belongTo, this.pageID) }}
-      </div>
+      <div class="page__descr"><span>Page description: </span>{{ pageDescription }}</div>
+      <div class="page__url"><span>Page address: </span>{{ pageURL }}</div>
     </div>
 
     <div class="button-wrapper">
@@ -55,7 +50,19 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useSitesStore, useModalsStore)
+    ...mapStores(useSitesStore, useModalsStore),
+    pageBadgeClass() {
+      return this.sitesStore.getPageBadge(this.belongTo, this.pageID) ? '' : 'bg-1'
+    },
+    pageBadgeURL() {
+      return this.sitesStore.getPageBadge(this.belongTo, this.pageID)
+    },
+    pageDescription() {
+      return this.sitesStore.getPageDescr(this.belongTo, this.pageID)
+    },
+    pageURL() {
+      return this.sitesStore.getPageURL(this.belongTo, this.pageID)
+    }
   }
 }
 </script>
