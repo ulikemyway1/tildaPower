@@ -3,15 +3,22 @@
     <div class="modal-overlay" @click="closeModal"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
+        <button class="close-modal" aria-label="Close modal" @click="closeModal">X</button>
       </div>
       <div class="modal-body">
         <h2>Add domain name</h2>
         <form class="modal-form-domain">
           <Transition>
-            <span v-if="!invalidDomain" class="validation-error">Please, use valid domain name</span>
+            <span v-if="!invalidDomain" class="validation-error"
+              >Please, use valid domain name</span
+            >
           </Transition>
-          <input type="text" class="domain-name-input" placeholder="Type domain name" @change="getDomainNameInput" />
+          <input
+            type="text"
+            class="domain-name-input"
+            placeholder="Type domain name"
+            @change="getDomainNameInput"
+          />
           <button class="button save-domain" @click.prevent="saveDomain">Save</button>
         </form>
       </div>

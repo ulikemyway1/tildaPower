@@ -1,9 +1,9 @@
 <template>
   <h3 class="sites__title title">Your existing sites:</h3>
-  <main v-if="this.sitesStore.getSites().length > 0" class="sites__content-wrapper">
+  <main v-if="sitesListLength > 0" class="sites__content-wrapper">
     <KeepAlive>
       <SitesSiteCard
-        v-for="site in this.sitesStore.getSites()"
+        v-for="site in sitesList"
         :key="site.id"
         :title="site.title"
         :id="site.id"
@@ -56,7 +56,13 @@ export default {
     siteTitle() {
       return `My project ${this.sitesStore.getSitesTotal() + 1}`
     },
-    ...mapStores(useSitesStore)
+    ...mapStores(useSitesStore),
+    sitesList() {
+      return this.sitesStore.getSites()
+    },
+    sitesListLength() {
+      return this.sitesStore.getSites()?.length || -1
+    }
   }
 }
 </script>

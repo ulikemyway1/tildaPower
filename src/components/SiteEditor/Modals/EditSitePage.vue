@@ -3,59 +3,86 @@
     <div class="modal-overlay" @click="closeModal"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <button @click="closeModal" class="close-modal" aria-label="Close modal">X</button>
+        <button class="close-modal" aria-label="Close modal" @click="closeModal">X</button>
         <h2>Change site page</h2>
         <div class="modal-toggle">
-          <span class="modal-toggle__item" :class="this.openMain ? 'active' : ''" tabindex="0"
-            @click="openMainTab">Main</span>
-          <span class="modal-toggle__item" :class="this.openBadge ? 'active' : ''" tabindex="0"
-            @click="openBadgeTab">Badge</span>
+          <span
+            class="modal-toggle__item"
+            :class="this.openMain ? 'active' : ''"
+            tabindex="0"
+            @click="openMainTab"
+            >Main</span
+          >
+          <span
+            class="modal-toggle__item"
+            :class="this.openBadge ? 'active' : ''"
+            tabindex="0"
+            @click="openBadgeTab"
+            >Badge</span
+          >
         </div>
       </div>
       <div class="modal-body">
-        <!-- Not working KeepAlive :C -->
-        <KeepAlive>
-          <form :is="openMain" v-if="openMain" class="modal-form-edit-main">
-            <label for="title" class="label">Page Title
-              <input ref="title" type="text" name="title" id="title" class="input" :value="this.sitesStore.getPageTitle(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
-            </label>
+        <form v-if="openMain" class="modal-form-edit-main">
+          <label for="title" class="label"
+            >Page Title
+            <input
+              ref="title"
+              type="text"
+              name="title"
+              id="title"
+              class="input"
+              :value="pageTitle"
+              @input="checkValidation"
+            />
+          </label>
 
-            <label for="descr" class="label">Page Description
-              <input ref="descr" type="text" name="descr" id="descr" class="input" :value="this.sitesStore.getPageDescr(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
-            </label>
+          <label for="descr" class="label"
+            >Page Description
+            <input
+              ref="descr"
+              type="text"
+              name="descr"
+              id="descr"
+              class="input"
+              :value="pageDescription"
+              @input="checkValidation"
+            />
+          </label>
 
-            <label for="url" class="label">Page URL
-              <input ref="url" type="text" name="url" id="url" class="input" :value="this.sitesStore.getPageURL(
-                this.modalsStore.getEditSiteID(),
-                this.modalsStore.getEditPageID()
-              )
-                " @input="checkValidation" />
-            </label>
+          <label for="url" class="label"
+            >Page URL
+            <input
+              ref="url"
+              type="text"
+              name="url"
+              id="url"
+              class="input"
+              :value="pageURL"
+              @input="checkValidation"
+            />
+          </label>
 
-            <button @click.prevent="saveChanges" class="button save-changes">Save changes</button>
-            <Transition>
-              <span v-if="notValid" class="validation-error">Please, fill all fields</span>
-            </Transition>
-          </form>
-        </KeepAlive>
-        <KeepAlive>
-          <form :is="openBadge" v-if="openBadge" class="modal-form-edit-main">
-            <div class="badges-wrapper">
-              <img v-for="img in this.images" :key="img" :src="img" alt="Image Badge" class="image-badge"
-                @click="setBadgeURL" />
-            </div>
+          <button class="button save-changes" @click.prevent="saveChanges">Save changes</button>
+          <Transition>
+            <span v-if="notValid" class="validation-error">Please, fill all fields</span>
+          </Transition>
+        </form>
 
-            <button @click.prevent="saveNewBadge" class="button save-changes">Save changes</button>
-          </form>
-        </KeepAlive>
+        <form v-if="openBadge" class="modal-form-edit-main">
+          <div class="badges-wrapper">
+            <img
+              v-for="img in this.images"
+              :key="img"
+              :src="img"
+              alt="Image Badge"
+              class="image-badge"
+              @click="setBadgeURL"
+            />
+          </div>
+
+          <button class="button save-changes" @click.prevent="saveNewBadge">Save changes</button>
+        </form>
       </div>
     </div>
   </div>
@@ -136,6 +163,24 @@ export default {
     ...mapStores(useModalsStore, useSitesStore),
     checkIfCanOpen() {
       return this.modalsStore.getModalStatus('editSitePage')
+    },
+    pageTitle() {
+      return this.sitesStore.getPageTitle(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID()
+      )
+    },
+    pageDescription() {
+      return this.sitesStore.getPageDescr(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID()
+      )
+    },
+    pageURL() {
+      return this.sitesStore.getPageURL(
+        this.modalsStore.getEditSiteID(),
+        this.modalsStore.getEditPageID()
+      )
     }
   },
   async mounted() {

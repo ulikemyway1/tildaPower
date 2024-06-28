@@ -37,7 +37,7 @@
 import CryptoJS, { AES } from 'crypto-js'
 import setAuthCookie from '@/helpers/setAuthCookie'
 import { mapStores } from 'pinia'
-import { useAppStore } from '@/stores/appStore'
+import { useAuthStore } from '@/stores/authStore'
 export default {
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     handleSuccessLogin() {
-      const token = AES.encrypt(new Date().getTime().toString(), 'happy-happy-happy').toString()
+      const token = AES.encrypt(this.currentDate, 'happy-happy-happy').toString()
       setAuthCookie(token)
       this.redirectToSites()
     },
@@ -68,7 +68,7 @@ export default {
       this.password = event.target.value
     },
     checkPassword(password) {
-      const hashedPassword = this.appStore.gethashedPassword
+      const hashedPassword = this.authStore.gethashedPassword
       const hashFromUserPassword = CryptoJS.SHA256(password).toString()
       return hashedPassword === hashFromUserPassword
     },
@@ -77,12 +77,15 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useAppStore),
+    ...mapStores(useAuthStore),
     emailIsValid() {
       return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.email)
     },
     passwordIsValid() {
       return this.checkPassword(this.password)
+    },
+    currentDate() {
+      return new Date().getTime().toString()
     }
   }
 }

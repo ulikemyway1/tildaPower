@@ -1,13 +1,12 @@
 <template>
   <main class="page-editor__content">
     <div class="rendered-page-wrapper" ref="renderedPageWrapper">
-      <div v-for="blockObject in pageContent">
+      <div v-for="blockObject in pageContent" :key="blockObject.id">
         <SliderComponent v-if="blockObject.type === 'slider'" />
         <component
           v-else
           contenteditable="true"
           :id="`custom-${blockObject.id}`"
-          :key="blockObject.id"
           :is="blockObject.tag"
           :src="blockObject?.imgSrc"
           :style="{

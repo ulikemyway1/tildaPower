@@ -1,5 +1,5 @@
 <template>
-  <main class="page-editor__toolbar" :class="{ shown: this.modalsStore.getModalStatus('toolbar') }">
+  <main class="page-editor__toolbar" :class="{ shown: modalStatus }">
     <div class="toolbar__menu">
       <header class="toolbar__header">
         <input type="search" class="search-input" placeholder="Components Library" />
@@ -8,7 +8,7 @@
       </header>
       <ul class="toolbar-menu__list">
         <li
-          v-for="category of this.toolbarStore.getCategoriesList()"
+          v-for="category of categoriesList"
           :key="category"
           class="toolbar-menu__list-item"
           :class="{ active: currentTabID === category.componentsID }"
@@ -20,7 +20,7 @@
       </ul>
     </div>
     <div class="toolbar__content" ref="toolbarContent"></div>
-    <div class="toolbar__back-drop"></div>
+    <div class="toolbar__back-drop" @click="closeModal"></div>
   </main>
 </template>
 
@@ -57,9 +57,7 @@ export default {
 
       for (const setItem of this.toolbarStore.getComponentsSetItems(categoryID)) {
         const li = document.createElement('li')
-        const div = document.createElement('div')
-
-        div.classList.add('component-description-wrapper')
+        li.classList.add('component-description-wrapper')
 
         const spanTitle = document.createElement('span')
         spanTitle.classList.add('component-title')
@@ -69,9 +67,7 @@ export default {
         spanDescr.classList.add('component-descr')
         spanDescr.textContent = setItem.descr
 
-        div.append(spanTitle, spanDescr)
-        li.append(div)
-
+        li.append(spanTitle, spanDescr)
         li.addEventListener('click', () => {
           const pageObjectDescr = {
             type: setItem.type,
@@ -100,6 +96,12 @@ export default {
     ...mapStores(useToolbarStore, useModalsStore, useSitesStore),
     shouldRender(setID) {
       return this.currentTab === setID
+    },
+    categoriesList() {
+      return this.toolbarStore.getCategoriesList()
+    },
+    modalStatus() {
+      return this.modalsStore.getModalStatus('toolbar')
     }
   },
   mounted() {
