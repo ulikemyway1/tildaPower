@@ -42,7 +42,7 @@ export default {
   mounted() {
     document.addEventListener('click', this.hideContextMenu)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('click', this.hideContextMenu)
   },
 

@@ -9,17 +9,10 @@
         <h2>Add domain name</h2>
         <form class="modal-form-domain">
           <Transition>
-            <span v-if="!invalidDomain" class="validation-error"
-              >Please, use valid domain name</span
-            >
+            <span v-if="!invalidDomain" class="validation-error">Please, use valid domain name</span>
           </Transition>
-          <input
-            type="text"
-            class="domain-name-input"
-            placeholder="Type domain name"
-            @change="getDomainNameInput"
-          />
-          <button @click.prevent="saveDomain" class="button save-domain">Save</button>
+          <input type="text" class="domain-name-input" placeholder="Type domain name" @change="getDomainNameInput" />
+          <button class="button save-domain" @click.prevent="saveDomain">Save</button>
         </form>
       </div>
     </div>
