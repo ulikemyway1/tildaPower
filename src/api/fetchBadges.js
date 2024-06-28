@@ -2,7 +2,7 @@ const url = `https://api.unsplash.com/photos/random?count=12&orientation=squaris
 export default async function getPhotos() {
   const imagesObject = await fetch(url)
     .then((obj) => obj.json())
-    .catch((error) => console.info('Sorry, unsplash API token overused'))
+    .catch(() => console.info('Sorry, unsplash API token overused'))
   const imagesURL = []
   if (imagesObject) {
     imagesObject.forEach((imageObject) => {

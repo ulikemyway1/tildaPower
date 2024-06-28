@@ -1,20 +1,23 @@
 <template>
   <main class="page-editor__content">
     <div class="rendered-page-wrapper" ref="renderedPageWrapper">
-      <component
-        contenteditable="true"
-        :id="`custom-${blockObject.id}`"
-        v-for="blockObject in pageContent"
-        :key="blockObject.id"
-        :is="blockObject.tag"
-        :src="blockObject.imgSrc"
-        :style="{
-          background: `url(${blockObject.imgSrc}) center center/cover no-repeat`,
-          minHeight: blockObject.minHeight
-        }"
-        @input="textEdit"
-        >{{ blockObject.textContent }}
-      </component>
+      <div v-for="blockObject in pageContent">
+        <SliderComponent v-if="blockObject.type === 'slider'" />
+        <component
+          v-else
+          contenteditable="true"
+          :id="`custom-${blockObject.id}`"
+          :key="blockObject.id"
+          :is="blockObject.tag"
+          :src="blockObject?.imgSrc"
+          :style="{
+            background: `url(${blockObject?.imgSrc}) center center/cover no-repeat`,
+            minHeight: blockObject?.minHeight
+          }"
+          @blur="textEdit"
+          >{{ blockObject?.textContent }}
+        </component>
+      </div>
     </div>
     <button class="button add-block-btn" @click="toggleMenu">Add new block</button>
     <SitePageEditorToolBar />
@@ -28,6 +31,7 @@ import { useModalsStore } from '@/stores/modalsStore'
 import { useSitesStore } from '@/stores/sitesStore'
 import SitePageEditorToolBar from '@/components/SitePageEditor/SitePageEditorToolBar.vue'
 import EditSitePage from '@/components/SiteEditor/Modals/EditSitePage.vue'
+import SliderComponent from '@/components/SitePageEditor/Components/SliderComponent.vue'
 export default {
   data() {
     return {
@@ -39,16 +43,12 @@ export default {
   },
   components: {
     SitePageEditorToolBar,
-    EditSitePage
+    EditSitePage,
+    SliderComponent
   },
   methods: {
     toggleMenu() {
       this.modalsStore.toggleModalStatus('toolbar')
-    },
-    createElement() {
-      const div = document.createElement('h2')
-      div.textContent = 'Heksksks'
-      return div
     },
     textEdit(event) {
       const blockID = Number(event.target.id.split('-')[1])

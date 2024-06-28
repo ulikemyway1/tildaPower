@@ -75,10 +75,10 @@ export default {
         li.addEventListener('click', () => {
           const pageObjectDescr = {
             type: setItem.type,
-            textContent: setItem.textContent,
-            tag: setItem.tag,
-            imgSrc: setItem.imgSrc,
-            minHeight: setItem.minHeight
+            textContent: setItem?.textContent,
+            tag: setItem?.tag,
+            imgSrc: setItem?.imgSrc,
+            minHeight: setItem?.minHeight
           }
           this.sitesStore.addPageContentObject(
             this.sitesStore.getEditingSiteID(),

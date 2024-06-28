@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import CryptoJS from 'crypto-js'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
